@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Responsive_Screen.dart';
+import 'package:email_validator/email_validator.dart';
 import 'Forgot_password.dart';
 Screen size;
 
@@ -72,9 +73,9 @@ class _wisState extends State<wis> {
                         borderSide: BorderSide(color: Colors.amber),
                       ),
                     ),
-                   /* validator: (val) => !EmailValidator.validate(val, true)
+                   validator: (val) => !EmailValidator.validate(val, true)
                         ? 'Not a valid email.'
-                        : null,*/
+                        : null,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),

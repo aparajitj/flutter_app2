@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/ui/Responsive_Screen.dart';
 Screen size;
@@ -58,6 +59,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
 
                     ),
+                    validator: (val) => !EmailValidator.validate(val, true)
+                        ? 'Not a valid email.'
+                        : null,
                     /* validator: (val) => !EmailValidator.validate(val, true)
                         ? 'Not a valid email.'
                         : null,*/

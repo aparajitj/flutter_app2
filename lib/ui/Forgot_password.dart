@@ -127,8 +127,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            Colors.orange,
-                            Colors.orange,
+                            Colors.amber,
+                            Colors.amber,
                           ],
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(5))),

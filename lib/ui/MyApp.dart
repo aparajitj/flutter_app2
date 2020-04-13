@@ -93,7 +93,7 @@ class _wisState extends State<wis> {
                             hintText: "Password",
 
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.orange),
+                              borderSide: BorderSide(color: Colors.amber),
                             ),
                           ),
                           validator: (value) {
@@ -185,8 +185,8 @@ class _wisState extends State<wis> {
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Colors.orange,
-                          Colors.orange,
+                          Colors.amber,
+                          Colors.amber,
                         ],
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(5))),

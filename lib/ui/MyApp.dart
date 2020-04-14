@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp2/ui/signup_page.dart';
 import 'Responsive_Screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'Forgot_password.dart';
@@ -55,7 +56,8 @@ void login_temp() async{
   SharedPreferences sp;
   sp= await SharedPreferences.getInstance();
   login=sp.getBool('true')?? false;
-  sp.setBool('true', login);
+
+  //sp.setBool('true', login);
 
 }
   @override
@@ -188,18 +190,15 @@ void login_temp() async{
                             ),
                           ),
                           onTap: (){
-                           Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => ForgotPassword()),
-                            );
+
                           },
                         ),
                         InkWell(
                           onTap: (){
-                            /*Navigator.pushReplacement(
+                            Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => CreateProfile()),
-                            );*/
+                              MaterialPageRoute(builder: (context) => SignupPage()),
+                            );
                           },
                           child: Text("New user? Sign up!",
                             style: TextStyle(

@@ -3,6 +3,7 @@ import 'package:flutterapp2/ui/MyApp.dart';
 void main() => runApp(new MaterialApp(
   //home: ScaffoldExample(),
   home: wis(),
+  //home: httpc(),
   //home: bizcard(),
   //home: CB(),*/
 ));

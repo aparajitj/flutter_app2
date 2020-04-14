@@ -1,27 +1,78 @@
+import 'dart:convert';
 import 'dart:ffi';
-
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Responsive_Screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'Forgot_password.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+bool login;
 Screen size;
+bool loginstat;
+Future<Album> fetchAlbum() async {
+  final response = await http.get('https://jsonplaceholder.typicode.com/albums/1');
 
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return Album.fromJson(json.decode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  }
+}
+class Album {
+  final int userId;
+  final int id;
+  final String title;
+
+  Album({this.userId, this.id, this.title});
+
+  factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(
+      userId: json['userId'],
+      id: json['id'],
+      title: json['title'],
+    );
+  }
+}
 
 class wis extends StatefulWidget {
   @override
   _wisState createState() => _wisState();
+
 }
 
 class _wisState extends State<wis> {
   final _formKey = GlobalKey<FormState>();
   int _index=0;
+  Future<Album> futureAlbum;
+void login_temp() async{
+  SharedPreferences sp;
+  sp= await SharedPreferences.getInstance();
+  login=sp.getBool('true')?? false;
+  sp.setBool('true', login);
 
+}
+  @override
+  void initState() {
+    super.initState();
+    login_temp();
+
+  }
 
     bool passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
+    if(login==false)
+      print('no luck');
+    else
+      print('luck');
     size = Screen(MediaQuery.of(context).size);
 
 
@@ -36,14 +87,18 @@ class _wisState extends State<wis> {
         _obscureText = !_obscureText;
       });
     }
+
     return Scaffold(
     backgroundColor: Colors.white,
         body:
         Padding(
+
           padding: const EdgeInsets.only(top: 60.0, left: 25.0, right: 25.0),
-          child: Theme(
+          child:
+          Theme(
             data: ThemeData(primaryColor: Colors.amber),
-            child: Form(
+            child:
+            Form(
               key: _formKey,
               child: Column(
                 children: <Widget>[
@@ -163,18 +218,25 @@ class _wisState extends State<wis> {
        bottomNavigationBar: (
           InkWell(
             onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ForgotPassword()),
+              );
               var _formKey;
-              if(_formKey.currentState.validate()){
+              /*if(_formKey.currentState.validate()){
                 setState(() {
                   showLoading = true;
                 });
-               // Login(context);
+                login=true;
+
+                login_temp();
+                // Login(context, login_status=login);
 //                if(status == 200 || status == "200"){
 //                  setState(() {
 //                    showLoading = false;
 //                  });
 //                }
-              }
+              }*/
             },
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 35, 20, 20),
@@ -380,6 +442,53 @@ class MyApp extends StatelessWidget {
               ),
             )
         )
+    );
+  }
+}
+
+class httpc extends StatefulWidget {
+  httpc({Key key}) : super(key: key);
+
+  @override
+  _httpcState createState() => _httpcState();
+}
+
+class _httpcState extends State<httpc> {
+  Future<Album> futureAlbum;
+
+  @override
+  void initState() {
+    super.initState();
+    futureAlbum = fetchAlbum();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Fetch Data Example',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Fetch Data Example'),
+        ),
+        body: Center(
+          child: FutureBuilder<Album>(
+            future: futureAlbum,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Text(snapshot.data.title);
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+
+              // By default, show a loading spinner.
+              return CircularProgressIndicator();
+            },
+          ),
+        ),
+      ),
     );
   }
 }

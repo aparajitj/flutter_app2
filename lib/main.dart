@@ -5,9 +5,9 @@ void main() => runApp(new MaterialApp(
   //home: ScaffoldExample(),
  // home: wis(),
   //home: httpc(),
-  home: SplashScreen()
+  //home: SplashScreen()
   //home: http_post(),
-  //home: bizcard(),
+  home: Bizcard(),
   //home: CB(),*/
 ));
 

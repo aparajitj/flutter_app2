@@ -339,15 +339,38 @@ class Bizcard extends StatelessWidget {
         ),
         backgroundColor: Colors.blueGrey,
         body: Container(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             child: Stack(
               alignment: Alignment.topCenter,
               children: <Widget>[
                 _getCard(),
-                _getAvatar()
-              ],
+                new RawMaterialButton(
+                  onPressed: () {},
+                  child: new Icon(
+                    Icons.account_circle,
+                    color: Colors.blue,
+                    size: 35.0,
+                  ),
+                  shape: new CircleBorder(),
+                  elevation: 2.0,
+                  fillColor: Colors.white,
+                  padding: const EdgeInsets.only(top: 10.0, left: 25.0, right: 75.0, bottom: 90),
+                ),],
             )
-        )
+        ),
+
+      bottomNavigationBar: BottomNavigationBar( type: BottomNavigationBarType.fixed,items: [
+        BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle), title: Text("Home")),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.event), title: Text("Events")),
+
+        BottomNavigationBarItem(
+            icon: Icon(Icons.web_asset), title: Text("Updates")),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.account_box), title: Text("Profile")),
+
+      ], onTap: (int index) => debugPrint("$index"),),
     );
   }
 
@@ -388,10 +411,11 @@ class Bizcard extends StatelessWidget {
         color: Colors.black45,
         borderRadius: BorderRadius.all(Radius.circular(50.0)),
         border: Border.all(color: Colors.redAccent, width: 1.2),
-        image: DecorationImage(
+        /* DecorationImage(
+
             image: NetworkImage("https://picsum.photos/300/300"),
             fit: BoxFit.cover),
-
+*/
       ),
 
     );

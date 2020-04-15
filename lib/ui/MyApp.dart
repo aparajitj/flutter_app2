@@ -52,18 +52,18 @@ class _wisState extends State<wis> {
   final _formKey = GlobalKey<FormState>();
   int _index=0;
   Future<Album> futureAlbum;
-void login_temp() async{
+void login_var() async{
   SharedPreferences sp;
   sp= await SharedPreferences.getInstance();
-  login=sp.getBool('true')?? false;
+ // login=sp.getBool('true')?? false;
 
-  //sp.setBool('true', login);
+  sp.setBool('true', login);
 
 }
   @override
   void initState() {
     super.initState();
-    login_temp();
+
 
   }
 
@@ -221,6 +221,7 @@ void login_temp() async{
                 context,
                 MaterialPageRoute(builder: (context) => ForgotPassword()),
               );
+              login_var();
               var _formKey;
               /*if(_formKey.currentState.validate()){
                 setState(() {
@@ -229,13 +230,14 @@ void login_temp() async{
                 login=true;
 
                 login_temp();
-                // Login(context, login_status=login);
+                // Login(context);
 //                if(status == 200 || status == "200"){
 //                  setState(() {
 //                    showLoading = false;
 //                  });
 //                }
               }*/
+
             },
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 35, 20, 20),

@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/constant/data.dart';
+import 'package:flutterapp2/ui/homepage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -13,6 +19,52 @@ class _SignupPageState extends State<SignupPage> {
 
 
   final GlobalKey<FormState>  form_key = GlobalKey<FormState>();
+  Future<String> signup(context) async {
+
+    String url ="https://test.gathrr.in/userapp/userregister";
+
+    http.post(url, body: {
+
+      "email": customer_email_id_controller.text,
+      "password": customer_password_controller.text,
+      "name": customer_name_controller.text,
+      "mobileno" : customer_contact_number_controller.text,
+
+      "device_id" : "",
+
+    }).then((http.Response response) async {
+      final int statusCode = response.statusCode;
+
+      if (statusCode < 200 || statusCode > 400 || json == null) {
+        throw new Exception("Error fetching data");
+      }
+      var responseArray = json.decode(response.body);
+      print(responseArray);
+      var status = responseArray['status'];
+      if(status == "200" || status == 200){
+        Fluttertoast.showToast(msg: "Sign up successfully!");
+        loginProcess();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MyHomepage()),
+        );
+      }else if(status == 404 || status == "404"){
+        Fluttertoast.showToast(
+            msg: "sign up not successful",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            textColor: Colors.black,
+            fontSize: 16.0
+        );
+
+      }
+      //pr.show();
+
+
+    });
+  }
 
   void loginProcess() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -31,7 +83,8 @@ class _SignupPageState extends State<SignupPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Icon(Icons.arrow_back,color: Colors.black,),
+        leading: IconButton(icon: Icon(Icons.arrow_back),color: Colors.black,onPressed:(){Navigator.pop(
+            context);},),
       ),
       body: Padding(
         padding: const EdgeInsets.only(top:10.0,bottom: 20,right: 20,left: 20),
@@ -119,6 +172,7 @@ class _SignupPageState extends State<SignupPage> {
                   )),
                 ),
                 onPressed: (){
+
                   setState(() {
                     if(!form_key.currentState.validate())
                     {
@@ -128,16 +182,15 @@ class _SignupPageState extends State<SignupPage> {
                     }
 
                     else
-                    {
-                      form_key.currentState.save();
+                    {                      signup(context);
+
+                    form_key.currentState.save();
                       customer_name_controller.clear();
                       customer_email_id_controller.clear();
                       customer_contact_number_controller.clear();
                       customer_password_controller.clear();
                       autoValidation = false;
-                      loginProcess();
-                     /* Navigator.push(
-                          context, MaterialPageRoute(builder: (context) =>MyHomePage() ));*/
+
                     }
                   });
 

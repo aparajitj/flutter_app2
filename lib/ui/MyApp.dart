@@ -7,12 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp2/ui/signup_page.dart';
 import 'Responsive_Screen.dart';
 import 'package:email_validator/email_validator.dart';
-import 'Forgot_password.dart';
+import 'forgot_password.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 bool login;
 Screen size;
+var _emailController= new TextEditingController();
+var _passwordController= new TextEditingController();
 bool loginstat;
+/*
 Future<Album> fetchAlbum() async {
   final response = await http.get('https://jsonplaceholder.typicode.com/albums/1');
 
@@ -26,6 +29,7 @@ Future<Album> fetchAlbum() async {
     throw Exception('Failed to load album');
   }
 }
+*/
 class Album {
   final int userId;
   final int id;
@@ -41,6 +45,7 @@ class Album {
     );
   }
 }
+/*
 
 class wis extends StatefulWidget {
   @override
@@ -60,6 +65,42 @@ void login_var() async{
   sp.setBool('true', login);
 
 }
+  Future<String> Login(context) async {
+
+    String url ="https://test.gathrr.in/userapp/userlogin";
+
+    http.post(url, body: {
+
+      "email": _emailController.text,
+      "password": _passwordController.text,
+      "device_id" : "",
+
+    }).then((http.Response response) async {
+      final int statusCode = response.statusCode;
+
+      if (statusCode < 200 || statusCode > 400 || json == null) {
+        throw new Exception("Error fetching data");
+      }
+      var responseArray = json.decode(response.body);
+      print(responseArray);
+      var status = responseArray['status'];
+      if(status == "200" || status == 200){
+        Fluttertoast.showToast(msg: "Logged in successfully!");
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomeScreen()),
+        );
+      }else if(status == 404 || status == "404"){
+
+
+    }
+      //pr.show();
+
+
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -71,16 +112,17 @@ void login_var() async{
 
   @override
   Widget build(BuildContext context) {
-    if(login==false)
+   */
+/* if(login==false)
       print('no luck');
     else
-      print('luck');
+      print('luck');*//*
+
     size = Screen(MediaQuery.of(context).size);
 
 
     bool _obscureText = true;
-    var _emailController= new TextEditingController();
-    var _passwordController= new TextEditingController();
+
 
     String _password;
     bool showLoading = false;
@@ -217,13 +259,16 @@ void login_var() async{
        bottomNavigationBar: (
           InkWell(
             onTap: (){
-              Navigator.push(
+              */
+/*Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ForgotPassword()),
-              );
-              login_var();
+              );*//*
+
+              Login(context);
               var _formKey;
-              /*if(_formKey.currentState.validate()){
+              */
+/*if(_formKey.currentState.validate()){
                 setState(() {
                   showLoading = true;
                 });
@@ -236,7 +281,8 @@ void login_var() async{
 //                    showLoading = false;
 //                  });
 //                }
-              }*/
+              }*//*
+
 
             },
             child: Padding(
@@ -282,6 +328,7 @@ void login_var() async{
 
 
 }
+*/
 
 class Bizcard extends StatelessWidget {
   @override
@@ -460,7 +507,9 @@ class _httpcState extends State<httpc> {
   @override
   void initState() {
     super.initState();
+/*
     futureAlbum = fetchAlbum();
+*/
   }
 
   @override

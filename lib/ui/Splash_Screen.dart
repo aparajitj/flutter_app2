@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
+import 'homepage.dart';
+import 'login.dart';
+
 import 'package:flutterapp2/ui/MyApp.dart';
 //import 'package:flutterapp2/ui/app_layout.dart';
 import 'dart:async';
@@ -15,12 +18,12 @@ class _SplashScreenState extends State<SplashScreen> {
   userSignupCheck() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     userLogedIn   = prefs.getBool('userLogedIn')??false;
-    if(userLogedIn == true){}
-      /*Navigator.push(
-          context, MaterialPageRoute(builder: (context) => MyHomePage()));*/
+    if(userLogedIn == true){
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MyHomepage()));}
     else
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => wis()));
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
 
   }
 
@@ -89,6 +92,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
         ],
       ),
+
     );
   }
 }

@@ -116,7 +116,8 @@ passwordVisible=true;
 
 
     return Scaffold(
-
+      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body:
       Padding(
@@ -243,45 +244,49 @@ passwordVisible=true;
                 )
               ],
             ),
-              Container(
-                height: 50,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))
+              Padding(
+                padding: const EdgeInsets.only(bottom:20.0),
+                child: Container(
+                  height: 50,
+                  child: RaisedButton(
+
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))
+                    ),
+                    elevation: 4,
+                    padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+                    color: Color(0Xfffaa926),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("Login",style: TextStyle(
+                        color: Colors.white,fontSize: 20,
+                      )),
+                    ),
+                    onPressed: (){
+
+                      setState(() {
+                        if(!_formKey.currentState.validate())
+                        {
+                          autoValidation = true;
+
+                          return;
+                        }
+
+                        else
+                        {Login(context);
+
+                        _formKey.currentState.save();
+                        customer_name_controller.clear();
+                        customer_email_id_controller.clear();
+                        customer_contact_number_controller.clear();
+                        customer_password_controller.clear();
+                        autoValidation = false;
+
+                        }
+                      });
+
+                    },
                   ),
-                  elevation: 4,
-                  padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
-                  color: Color(0Xfffaa926),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Login",style: TextStyle(
-                      color: Colors.white,fontSize: 20,
-                    )),
-                  ),
-                  onPressed: (){
-
-                    setState(() {
-                      if(!_formKey.currentState.validate())
-                      {
-                        autoValidation = true;
-
-                        return;
-                      }
-
-                      else
-                      {Login(context);
-
-                      _formKey.currentState.save();
-                      customer_name_controller.clear();
-                      customer_email_id_controller.clear();
-                      customer_contact_number_controller.clear();
-                      customer_password_controller.clear();
-                      autoValidation = false;
-
-                      }
-                    });
-
-                  },
                 ),
               )
             ],

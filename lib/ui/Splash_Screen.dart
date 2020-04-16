@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
-import 'homepage.dart';
+import 'app_layout/homepage.dart';
 import 'login.dart';
 
 import 'package:flutterapp2/ui/MyApp.dart';
@@ -54,13 +54,13 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Image(
-            image: AssetImage('assets/images/fuel_logo1.png'),
+            image: AssetImage('asset/images/fuel_logo1.png'),
             height: MediaQuery.of(context).size.width-150,
             width: MediaQuery.of(context).size.width-150,
           ),
 
           Image(
-            image: AssetImage('assets/images/fuel_logo2.png'),
+            image: AssetImage('asset/images/fuel_logo2.png'),
             height: MediaQuery.of(context).size.width/2,
             width: MediaQuery.of(context).size.width/2,
           ),

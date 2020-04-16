@@ -217,8 +217,8 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:  EdgeInsets.only(right:40.0,left: 40,top: 20),
-              child: Row(
+              padding:  EdgeInsets.only(right:40.0,left: 40,top: 35),
+              child: Row(crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   CircleAvatar(

@@ -112,181 +112,181 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
 
-      backgroundColor: Colors.white,
-      body:
-      Padding(
+        backgroundColor: Colors.white,
+        body:
+        Padding(
 
-        padding: const EdgeInsets.only(top: 60.0, left: 25.0, right: 25.0, bottom: 10),
-        child:
-        Theme(
-          data: ThemeData(primaryColor: Colors.amber),
+          padding: const EdgeInsets.only(top: 60.0, left: 25.0, right: 25.0, bottom: 10),
           child:
-          Stack(
-            alignment: Alignment.bottomCenter,
-            children: <Widget>[Column(
-              children: <Widget>[
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 30.0),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("Login",
-                              style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height/20,
-                                  color: Colors.grey.shade800
-                              ),
-                            )),
-                      ),
-                      TextFormField(
-                        cursorColor: Colors.black,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.only(bottom: 3.0),
-                            child: Icon(Icons.email),
-                          ),
-                          hintText: "Email",
-
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.amber),
-                          ),
+          Theme(
+            data: ThemeData(primaryColor: Colors.amber),
+            child:
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: <Widget>[Column(
+                children: <Widget>[
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 30.0),
+                          child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text("Login",
+                                style: TextStyle(
+                                    fontSize: MediaQuery.of(context).size.height/20,
+                                    color: Colors.grey.shade800
+                                ),
+                              )),
                         ),
-                        validator: (val) => !EmailValidator.validate(val, true)
-                            ? 'Not a valid email.'
-                            : null,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: Stack(
-                          children: <Widget>[
-                            TextFormField(
-                              obscureText: _obscureText,
-                              cursorColor: Colors.black,
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                prefixIcon: Padding(
-                                  padding: const EdgeInsets.only(bottom: 3.0),
-                                  child: Icon(Icons.lock),
-                                ),
-                                hintText: "Password",
-
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.amber),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value.length == 0) {
-                                  return 'Password is compulsary!';
-                                } else if (value.length < 6) {
-                                  return 'Password must be more than 6 charecters';
-                                }
-                                return null;
-                              },
-                              controller: _passwordController,
+                        TextFormField(
+                          cursorColor: Colors.black,
+                          keyboardType: TextInputType.emailAddress,
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(bottom: 3.0),
+                              child: Icon(Icons.email),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: InkWell(
-                                  // onTap: toggle,
-                                  child: Icon(Icons.remove_red_eye,
-                                    color: Colors.grey.shade500,
+                            hintText: "Email",
+
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.amber),
+                            ),
+                          ),
+                          validator: (val) => !EmailValidator.validate(val, true)
+                              ? 'Not a valid email.'
+                              : null,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Stack(
+                            children: <Widget>[
+                              TextFormField(
+                                obscureText: _obscureText,
+                                cursorColor: Colors.black,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                  prefixIcon: Padding(
+                                    padding: const EdgeInsets.only(bottom: 3.0),
+                                    child: Icon(Icons.lock),
+                                  ),
+                                  hintText: "Password",
+
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.amber),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value.length == 0) {
+                                    return 'Password is compulsary!';
+                                  } else if (value.length < 6) {
+                                    return 'Password must be more than 6 charecters';
+                                  }
+                                  return null;
+                                },
+                                controller: _passwordController,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: InkWell(
+                                    // onTap: toggle,
+                                    child: Icon(Icons.remove_red_eye,
+                                      color: Colors.grey.shade500,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
 
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 10,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    InkWell(
-                      child: Text("Forgot password?",
-                        style: TextStyle(
-                          color: Colors.grey,
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      InkWell(
+                        child: Text("Forgot password?",
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
-                      onTap: (){ Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => ForgotPassword())
-                      );
-
-                      },
-                    ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignupPage()),
+                        onTap: (){ Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => ForgotPassword())
                         );
-                      },
-                      child: Text("New user? Sign up!",
-                        style: TextStyle(
-                          color: Colors.grey,
+
+                        },
+                      ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignupPage()),
+                          );
+                        },
+                        child: Text("New user? Sign up!",
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
+                    ],
+                  )
+                ],
+              ),
+                Container(
+                  height: 50,
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))
                     ),
-                  ],
+                    elevation: 4,
+                    padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+                    color: Color(0Xfffaa926),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("Login",style: TextStyle(
+                        color: Colors.white,fontSize: 20,
+                      )),
+                    ),
+                    onPressed: (){
+
+                      setState(() {
+                        if(!_formKey.currentState.validate())
+                        {
+                          autoValidation = true;
+
+                          return;
+                        }
+
+                        else
+                        {Login(context);
+
+                        _formKey.currentState.save();
+                        customer_name_controller.clear();
+                        customer_email_id_controller.clear();
+                        customer_contact_number_controller.clear();
+                        customer_password_controller.clear();
+                        autoValidation = false;
+
+                        }
+                      });
+
+                    },
+                  ),
                 )
               ],
             ),
-              Container(
-                height: 50,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))
-                  ),
-                  elevation: 4,
-                  padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
-                  color: Color(0Xfffaa926),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Login",style: TextStyle(
-                      color: Colors.white,fontSize: 20,
-                    )),
-                  ),
-                  onPressed: (){
-
-                    setState(() {
-                      if(!_formKey.currentState.validate())
-                      {
-                        autoValidation = true;
-
-                        return;
-                      }
-
-                      else
-                      {Login(context);
-
-                      _formKey.currentState.save();
-                      customer_name_controller.clear();
-                      customer_email_id_controller.clear();
-                      customer_contact_number_controller.clear();
-                      customer_password_controller.clear();
-                      autoValidation = false;
-
-                      }
-                    });
-
-                  },
-                ),
-              )
-            ],
           ),
         ),
-      ),
 
-      /*bottomNavigationBar: (
+        /*bottomNavigationBar: (
             InkWell(
               onTap: (){
                 var _formKey;

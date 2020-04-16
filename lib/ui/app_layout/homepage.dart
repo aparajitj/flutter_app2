@@ -699,33 +699,7 @@ class Homepage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-              icon:Icon(Icons.home),
-              title: Text("Home")
-          ),
-          BottomNavigationBarItem(
-              icon:Icon(Icons.live_tv,color: Colors.black45,),
-              title: Text("Ongoing")
-          ),
-          BottomNavigationBarItem(
-              icon:Icon(Icons.scanner,color: Colors.black45),
-              title: Text("Scan")
-          ),
-          BottomNavigationBarItem(
-              icon:Icon(Icons.contacts,color: Colors.black45),
-              title: Text("Contacts")
-          ),
-          BottomNavigationBarItem(
-              icon:Icon(Icons.person,color: Colors.black45),
-              title: Text("Profile")
-          ),
 
-        ],
-        selectedItemColor: Colors.black,
-        currentIndex: 0,
-      ),
     );
   }
 }

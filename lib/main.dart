@@ -4,9 +4,11 @@ import 'package:flutterapp2/ui/Splash_Screen.dart';
 import 'package:flutterapp2/ui/app_layout/abcd.dart';
 import 'package:flutterapp2/ui/app_layout/job_updates.dart';
 import 'package:flutterapp2/ui/login.dart';
+
+import 'ui/temp.dart';
 void main() => runApp(new MaterialApp(
   //home: ScaffoldExample(),
- // home: wis(),
+   //home: wis(),
   //home: httpc(),
   //home: SplashScreen()
   //home: http_post(),

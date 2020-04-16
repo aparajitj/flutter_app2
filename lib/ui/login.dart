@@ -15,7 +15,9 @@ import 'forgot_password.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:passwordfield/passwordfield.dart';
 
+bool _obscureText = false;
 bool login;
 Screen size;
 var _emailController= new TextEditingController();
@@ -84,11 +86,18 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-
+passwordVisible=true;
 
   }
 
   bool passwordVisible = false;
+  void toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+      print(_obscureText);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -99,16 +108,12 @@ class _LoginPageState extends State<LoginPage> {
     size = Screen(MediaQuery.of(context).size);
 
 
-    bool _obscureText = true;
+    final bool _obscureText = true;
 
 
     String _password;
     bool showLoading = false;
-    void _toggle() {
-      setState(() {
-        _obscureText = !_obscureText;
-      });
-    }
+
 
     return Scaffold(
 
@@ -119,7 +124,8 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.only(top: 60.0, left: 25.0, right: 25.0, bottom: 10),
         child:
         Theme(
-          data: ThemeData(primaryColor: Colors.amber),
+          data: ThemeData(primaryColor: Colors.amber,
+          primarySwatch: Colors.amber),
           child:
           Stack(
             alignment: Alignment.bottomCenter,
@@ -164,20 +170,26 @@ class _LoginPageState extends State<LoginPage> {
                         child: Stack(
                           children: <Widget>[
                             TextFormField(
-                              obscureText: _obscureText,
+
                               cursorColor: Colors.black,
                               keyboardType: TextInputType.text,
+                              obscureText: passwordVisible,
                               decoration: InputDecoration(
                                 prefixIcon: Padding(
                                   padding: const EdgeInsets.only(bottom: 3.0),
                                   child: Icon(Icons.lock),
                                 ),
-                                hintText: "Password",
 
+                                hintText: "Password",
+                                suffixIcon: IconButton(icon: Icon(passwordVisible?Icons.visibility:Icons.visibility_off,),
+                                    onPressed: (){setState((){
+                                passwordVisible=!passwordVisible;}
+                                );}),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.amber),
                                 ),
                               ),
+
                               validator: (value) {
                                 if (value.length == 0) {
                                   return 'Password is compulsary!';
@@ -187,19 +199,10 @@ class _LoginPageState extends State<LoginPage> {
                                 return null;
                               },
                               controller: _passwordController,
+
+
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: InkWell(
-                                  // onTap: toggle,
-                                  child: Icon(Icons.remove_red_eye,
-                                    color: Colors.grey.shade500,
-                                  ),
-                                ),
-                              ),
-                            ),
+
                           ],
                         ),
                       ),
@@ -285,6 +288,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+
 
       /*bottomNavigationBar: (
             InkWell(

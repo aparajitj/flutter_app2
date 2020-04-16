@@ -60,14 +60,14 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => MyHomepage()),
+              builder: (context) => Homepage()),
         );
       }else if(status == 404 || status == "404"){
         Fluttertoast.showToast(
             msg: "Userd doesn't exist",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+//            timeInSecForIosWeb: 1,
             textColor: Colors.black,
             fontSize: 16.0
         );

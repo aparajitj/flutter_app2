@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/ui/MyApp.dart';
 import 'package:flutterapp2/ui/Splash_Screen.dart';
+import 'package:flutterapp2/ui/homepage.dart';
+import 'package:flutterapp2/ui/profile.dart';
 void main() => runApp(new MaterialApp(
   //home: ScaffoldExample(),
  // home: wis(),
   //home: httpc(),
   //home: SplashScreen()
   //home: http_post(),
-  home: Bizcard(),
+  home: Homepage(),
   //home: CB(),*/
 ));
 

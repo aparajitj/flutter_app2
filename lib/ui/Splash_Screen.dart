@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     userLogedIn   = prefs.getBool('userLogedIn')??false;
     if(userLogedIn == true){
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => MyHomepage()));}
+          context, MaterialPageRoute(builder: (context) => Homepage()));}
     else
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => LoginPage()));

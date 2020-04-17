@@ -41,9 +41,9 @@ class ProfilePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          Text("Add Name",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),
+                          Text("Shreyas Hosmani",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),
                           SizedBox(height: 7,),
-                          Text("College: Add College",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 12,color: Colors.black87),),
+                          Text("College: coep",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 12,color: Colors.black87),),
                           SizedBox(height: 3,),
                           Text("Aptitude Score:",style: TextStyle(fontSize: 10,color: Colors.black54),),
                           SizedBox(height: 3,),

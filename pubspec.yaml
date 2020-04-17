@@ -44,6 +44,7 @@ flutter:
   assets:
     - assets/images/fuel_logo1.png
     - assets/images/fuel_logo2.png
+    - assets/images/insta.png
     - asset/images/download.jpg
     - asset/images/fuel_logo1.png
     - asset/images/fuel_logo2.png

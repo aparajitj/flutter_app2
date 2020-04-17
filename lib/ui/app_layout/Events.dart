@@ -59,22 +59,24 @@ class _EventsState extends State<Events> {
 
 
           children:     <Widget>[
-            CustomPaint(
-                painter: TitleDraw(),
-                child: Container(
-                    padding: EdgeInsets.all(20),
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Events',style: TextStyle(color:Colors.white,fontSize: MediaQuery.of(context).size.height/30))
-                      ],
-                    ))
-            ),
+
             Stack(
                 children: <Widget>[
+                  CustomPaint(
+                      painter: TitleDraw(),
+                      child: Container(
+                          padding: EdgeInsets.all(20),
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height/4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text('Events',style: TextStyle(color:Colors.white,fontSize: MediaQuery.of(context).size.height/30))
+                            ],
+                          ))
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(top:8.0),
+                    padding: const EdgeInsets.only(top:80.0),
                     child:GestureDetector(
 
                         onTap: () {Navigator.pushReplacement(

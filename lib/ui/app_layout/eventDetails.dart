@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-class jobupdates extends StatelessWidget {
+class eventDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container( );
+    return Scaffold(
+
+
+
+
+    );
   }
 }

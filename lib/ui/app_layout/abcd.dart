@@ -32,7 +32,7 @@ class _MyAppaState extends State<MyAppa> {
         children: <Widget>[
           Homepage(),
         Events(),
-          ju(),
+          jobUpdates(),
           ProfilePage(),
         ],
 

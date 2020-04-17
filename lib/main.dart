@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/ui/MyApp.dart';
 import 'package:flutterapp2/ui/Splash_Screen.dart';
+import 'package:flutterapp2/ui/app_layout/Events.dart';
+import 'package:flutterapp2/ui/app_layout/Updates.dart';
 import 'package:flutterapp2/ui/app_layout/abcd.dart';
 import 'package:flutterapp2/ui/app_layout/job_updates.dart';
 import 'package:flutterapp2/ui/login.dart';
@@ -14,7 +16,8 @@ void main() => runApp(new MaterialApp(
   //home: http_post(),
   //home: MyAppa(),
   //home: CB(),*/
-  home:LoginPage(),
+  //home:updates(),
+  home:Events(),
   //home:LoginPage(),
 ));
 

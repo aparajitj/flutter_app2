@@ -1,41 +1,14 @@
 //import 'dart:html';
 
+//import 'dart:html';
+import 'Responsive_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'eventDetails.dart';
 import 'homepage.dart';
-Container _getCard() {
-  return Container(
 
-    decoration: new BoxDecoration(
-        borderRadius: new BorderRadius.all(Radius.circular(30)
-    )
-    ),
-    child: /*Image(
-
-      image: AssetImage('assets/images/download.jpg'),
-      height: 150,
-      width:150,
-    )*/
-    Center(
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
-
-        ),
-        child: Image.asset(
-            'asset/images/download.jpg',
-            width: 350,
-            height: 250,
-            fit:BoxFit.fill
-
-        ),
-      ),
-    ),
-
-  );
-}
-
+Screen size;
 
 
     /*height: 250,
@@ -62,9 +35,16 @@ Container _getCard() {
       ],
     ),*/
 
-class Events extends StatelessWidget {
+class Events extends StatefulWidget {
+  @override
+  _EventsState createState() => _EventsState();
+}
+
+class _EventsState extends State<Events> {
   @override
   Widget build(BuildContext context) {
+    size = Screen(MediaQuery.of(context).size);
+
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
 
@@ -74,7 +54,7 @@ class Events extends StatelessWidget {
       body:
 
 
-          
+
         Column(
 
 
@@ -87,7 +67,7 @@ class Events extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Events',style: TextStyle(color:Colors.white,fontSize: 30))
+                        Text('Events',style: TextStyle(color:Colors.white,fontSize: MediaQuery.of(context).size.height/30))
                       ],
                     ))
             ),
@@ -95,7 +75,31 @@ class Events extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top:8.0),
-                    child: Center(
+                    child:GestureDetector(
+
+                        onTap: () {Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => eventDetails()),
+                        );},
+                        child: Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+
+                            ),
+                            child: Image.asset(
+                                'asset/images/download.jpg',
+                                width: MediaQuery.of(context).size.height/2.25,
+                                height: MediaQuery.of(context).size.height/4,
+                                fit:BoxFit.fill
+
+
+                            ),
+                          ),
+                        ),
+                    ),
+                    /*Center(
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
@@ -107,15 +111,16 @@ class Events extends StatelessWidget {
                             height: 225,
                             fit:BoxFit.fill
 
+
                         ),
                       ),
-                    ),
+                    ),*/
                   ),
                   //Align(alignment:Alignment.bottomLeft,child: Text("#Fuel For Nation",style: TextStyle(fontSize:25,color: Colors.white),))
                 ]
 
-            ),
-            //_getCard(),
+            ),//top image
+
             Column(
 
               children: <Widget>[
@@ -145,102 +150,15 @@ class Events extends StatelessWidget {
                         image: AssetImage('asset/images/fuel_logo1.png'),
                         height: MediaQuery.of(context).size.width-300,
                         width: MediaQuery.of(context).size.width-300,
+
                       ),
 
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          new Text("Event Name Example",style: TextStyle(fontSize:15)),
+                          new Text("Fuel Future Skills Summit...",style: TextStyle(fontSize:15)),
 
-                          new Text("9th Feb 2020",style: TextStyle(color: Colors.grey)),
-
-                          new Text("till 7 pm",style: TextStyle(color: Colors.grey)),
-                          new Text("Sunny's World Lavale, Pune",style: TextStyle(color: Colors.grey)),
-                        ],
-                      ),
-                    ],
-                  ),
-
-                ],
-
-              ),
-
-            ),
-            SizedBox(
-              height: 3,
-            ),
-            Container(
-              color: Colors.white,
-
-
-
-
-              child:  Column(          crossAxisAlignment: CrossAxisAlignment.start,
-
-
-
-
-
-                children: <Widget>[
-
-                  Row(
-                    children: <Widget>[
-                      Image(
-                        image: AssetImage('asset/images/fuel_logo1.png'),
-                        height: MediaQuery.of(context).size.width-300,
-                        width: MediaQuery.of(context).size.width-300,
-                      ),
-
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Text("Event Name Example",style: TextStyle(fontSize:15)),
-
-                          new Text("9th Feb 2020",style: TextStyle(color: Colors.grey)),
-
-                          new Text("till 7 pm",style: TextStyle(color: Colors.grey)),
-                          new Text("Sunny's World Lavale, Pune",style: TextStyle(color: Colors.grey)),
-                        ],
-                      ),
-                    ],
-                  ),
-
-                ],
-
-              ),
-
-            ),
-            SizedBox(
-              height: 3,
-            ),
-            Container(
-              color: Colors.white,
-
-
-
-
-              child:  Column(          crossAxisAlignment: CrossAxisAlignment.start,
-
-
-
-
-
-                children: <Widget>[
-
-                  Row(
-                    children: <Widget>[
-                      Image(
-                        image: AssetImage('asset/images/fuel_logo1.png'),
-                        height: MediaQuery.of(context).size.width-300,
-                        width: MediaQuery.of(context).size.width-300,
-                      ),
-
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Text("Event Name Example",style: TextStyle(fontSize:15)),
-
-                          new Text("9th Feb 2020",style: TextStyle(color: Colors.grey)),
+                          new Text("9th Feb 2020 | 2:30 pm",style: TextStyle(color: Colors.grey)),
 
                           new Text("till 7 pm",style: TextStyle(color: Colors.grey)),
                           new Text("Sunny's World Lavale, Pune",style: TextStyle(color: Colors.grey)),

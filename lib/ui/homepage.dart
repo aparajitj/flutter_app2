@@ -724,6 +724,7 @@ class Homepage extends StatelessWidget {
 
         ],
         selectedItemColor: Colors.black,
+
         currentIndex: 0,
       ),
     );

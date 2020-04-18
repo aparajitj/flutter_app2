@@ -19,17 +19,14 @@ class courseDetails extends StatelessWidget {
     ),
       body: Column(
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              Image.asset(
-                  'assets/images/course.png',
-                  width: MediaQuery.of(context).size.height/3.5,
-                  height: MediaQuery.of(context).size.height/3.5,
+          Image.asset(
+              'assets/images/course.png',
+              width: MediaQuery.of(context).size.height/4.5,
+              height: MediaQuery.of(context).size.height/4.5,
+            fit: BoxFit.fill,
 
 
 
-              ),
-            ],
           ),
           Column(crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[

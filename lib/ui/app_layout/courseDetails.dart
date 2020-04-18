@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class courseDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
       leading: IconButton(
         icon: Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () => Navigator.of(context).pop(),
@@ -18,13 +19,13 @@ class courseDetails extends StatelessWidget {
     ),
       body: Column(
         children: <Widget>[
-          Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+          Column(
             children: <Widget>[
               Image.asset(
-                  'asset/images/download.jpg',
-                  width: MediaQuery.of(context).size.height/2.25,
+                  'assets/images/course.png',
+                  width: MediaQuery.of(context).size.height/3.5,
                   height: MediaQuery.of(context).size.height/3.5,
-                  fit:BoxFit.fill
+
 
 
               ),

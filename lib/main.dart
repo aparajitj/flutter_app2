@@ -3,23 +3,32 @@ import 'package:flutterapp2/ui/MyApp.dart';
 import 'package:flutterapp2/ui/Splash_Screen.dart';
 import 'package:flutterapp2/ui/app_layout/Events.dart';
 import 'package:flutterapp2/ui/app_layout/Updates.dart';
-import 'package:flutterapp2/ui/app_layout/abcd.dart';
+import 'package:flutterapp2/ui/app_layout/page_controller.dart';
+import 'package:flutterapp2/ui/app_layout/courseDetails.dart';
+import 'package:flutterapp2/ui/app_layout/eventDetails.dart';
 import 'package:flutterapp2/ui/app_layout/job_updates.dart';
+import 'package:flutterapp2/ui/app_layout/profile/profile.dart';
+
 import 'package:flutterapp2/ui/login.dart';
 
-import 'ui/temp.dart';
-/*void main() => runApp(new MaterialApp(
+/*
+void main() => runApp(new MaterialApp(
+    debugShowCheckedModeBanner: false,
   //home: ScaffoldExample(),
    //home: wis(),
   //home: httpc(),
   //home: SplashScreen()
   //home: http_post(),
   //home: MyAppa(),
-  //home: CB(),*/
+  //home: CB(),
   //home:updates(),
-  home:Events(),
+  //home:Events(),
+ //home:eventDetails(),
+   //home:courseDetails(),
+  home:ProfilePage(),
   //home:LoginPage(),
 ));*/
+
 
 void main() => runApp(new MyApp());
 
@@ -34,10 +43,11 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: ProfilePage(),
+      home: MyAppa(),
     );
   }
 }
+
 
 
 

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 class eventDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,11 @@ class eventDetails extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Icon(Icons.link,color: Colors.blue,),
-                Text('   | Website')
+                Text('   | '),
+                new InkWell(
+                    child: new Text('Website',),
+                    onTap: () => launch('http://fuelngo.in/')
+                )
               ],
             ),
           ),//website

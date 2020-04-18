@@ -48,7 +48,7 @@ flutter:
     - asset/images/download.jpg
     - asset/images/fuel_logo1.png
     - asset/images/fuel_logo2.png
-    -
+    - assets/images/course.png
 
 
   # The following line ensures that the Material Icons font is

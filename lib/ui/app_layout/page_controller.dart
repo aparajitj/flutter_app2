@@ -3,6 +3,8 @@ import 'package:flutterapp2/ui/app_layout/Events.dart';
 import 'package:flutterapp2/ui/app_layout/homepage.dart';
 import 'package:flutterapp2/ui/app_layout/job_updates.dart';
 import 'package:flutterapp2/ui/app_layout/profile/profile.dart';
+
+import 'Updates.dart';
 class MyAppa extends StatefulWidget {
   @override
   _MyAppaState createState() => _MyAppaState();
@@ -32,7 +34,7 @@ class _MyAppaState extends State<MyAppa> {
         children: <Widget>[
           Homepage(),
         Events(),
-          jobUpdates(),
+          updates(),
           ProfilePage(),
         ],
 

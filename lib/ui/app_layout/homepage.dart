@@ -1,6 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 class Homepage extends StatelessWidget {
+
+  _launchFacebookURL() async {
+    const url = 'https://flutter.dev';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,39 +57,44 @@ class Homepage extends StatelessWidget {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(right: 15),
-                          child: Container(
-                            padding: EdgeInsets.only(top: 10,bottom: 10),
-                            //height: 80,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: Color(0Xff66bb6a),
-                                borderRadius: BorderRadius.all(Radius.circular(9)),
+                          child: InkWell(
+                            child: Container(
+                              padding: EdgeInsets.only(top: 10,bottom: 10),
+                              //height: 80,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  color: Color(0Xff66bb6a),
+                                  borderRadius: BorderRadius.all(Radius.circular(9)),
 
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.white,
-                                          width: 4
-                                      ),
-                                      image: DecorationImage(
-                                        image: NetworkImage("https://www.pngitem.com/pimgs/m/510-5106766_whatsapp-png-icon-download-png-as-icon-logo.png"),
-                                      )
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                        border: Border.all(
+                                            color: Colors.white,
+                                            width: 4
+                                        ),
+                                        image: DecorationImage(
+                                          image: NetworkImage("https://www.pngitem.com/pimgs/m/510-5106766_whatsapp-png-icon-download-png-as-icon-logo.png"),
+                                        )
+                                    ),
+                                    height: 35,
+                                    width: 35,
+
                                   ),
-                                  height: 35,
-                                  width: 35,
+                                  Text("Whatsapp",style: TextStyle(color: Colors.white,fontSize: 20),),
+                                  Text("join group",style: TextStyle(color: Colors.white,fontSize: 10),),
 
-                                ),
-                                Text("Whatsapp",style: TextStyle(color: Colors.white,fontSize: 20),),
-                                Text("join group",style: TextStyle(color: Colors.white,fontSize: 10),),
-
-                              ],
+                                ],
+                              ),
                             ),
+                            onTap: (){
+
+                            },
                           ),
                         ),
                         Padding(

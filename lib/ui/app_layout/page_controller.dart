@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp2/ui/app_layout/Events.dart';
 import 'package:flutterapp2/ui/app_layout/homepage.dart';
 import 'package:flutterapp2/ui/app_layout/job_updates.dart';
-import 'package:flutterapp2/ui/app_layout/profile.dart';
+import 'package:flutterapp2/ui/app_layout/profile/profile.dart';
 class MyAppa extends StatefulWidget {
   @override
   _MyAppaState createState() => _MyAppaState();

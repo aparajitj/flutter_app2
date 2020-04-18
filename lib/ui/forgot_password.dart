@@ -1,7 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp2/ui/Responsive_Screen.dart';
-Screen size;
+
 bool _login;
 
 class ForgotPassword extends StatefulWidget {
@@ -21,7 +20,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget build(BuildContext context) {
     debugPrint('kjlijhjkh');
 
-    size = Screen(MediaQuery.of(context).size);
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

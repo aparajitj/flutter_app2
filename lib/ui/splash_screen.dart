@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
-import 'app_layout/homepage.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
+
 import 'login.dart';
 
-import 'package:flutterapp2/ui/MyApp.dart';
 //import 'package:flutterapp2/ui/app_layout.dart';
 import 'dart:async';
 import 'package:flutterapp2/ui/signup_page.dart';

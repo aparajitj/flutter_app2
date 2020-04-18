@@ -5,7 +5,23 @@ import 'package:url_launcher/url_launcher.dart';
 class Homepage extends StatelessWidget {
 
   _launchFacebookURL() async {
-    const url = 'https://flutter.dev';
+    const url = 'https://www.facebook.com/groups/733425103781963/?ref=share';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+  _launchLinkedinURL() async {
+    const url = 'https://www.linkedin.com/company/fuelian/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+  _launchWhatsappURL() async {
+    const url = '';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -94,81 +110,88 @@ class Homepage extends StatelessWidget {
                             ),
                             onTap: (){
 
+
                             },
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 15),
-                          child: Container(
-                            padding: EdgeInsets.only(top: 10,bottom: 10),
-                            height: 80,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: Color(0Xff2196f3),
-                              borderRadius: BorderRadius.all(Radius.circular(9)),
+                          child: InkWell(
+                            child: Container(
+                              padding: EdgeInsets.only(top: 10,bottom: 10),
+                              height: 80,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: Color(0Xff2196f3),
+                                borderRadius: BorderRadius.all(Radius.circular(9)),
 
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.white,
-                                          width: 4
-                                      ),
-                                      image: DecorationImage(
-                                        image: NetworkImage("https://cdn.clipart.email/aa3b89e8be9b0c92ae31a52a4ccf71c1_fb-icon-circle-iconset-martz90_512-512.png"),
-                                      )
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            color: Colors.white,
+                                            width: 4
+                                        ),
+                                        image: DecorationImage(
+                                          image: NetworkImage("https://cdn.clipart.email/aa3b89e8be9b0c92ae31a52a4ccf71c1_fb-icon-circle-iconset-martz90_512-512.png"),
+                                        )
+                                    ),
+                                    height: 35,
+                                    width: 35,
+
                                   ),
-                                  height: 35,
-                                  width: 35,
+                                  Text("Facebook",style: TextStyle(color: Colors.white,fontSize: 20),),
+                                  Text("like page",style: TextStyle(color: Colors.white,fontSize: 10),),
 
-                                ),
-                                Text("Facebook",style: TextStyle(color: Colors.white,fontSize: 20),),
-                                Text("like page",style: TextStyle(color: Colors.white,fontSize: 10),),
-
-                              ],
+                                ],
+                              ),
                             ),
+                            onTap: _launchFacebookURL,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 15),
-                          child: Container(
-                            padding: EdgeInsets.only(top: 10,bottom: 10),
-                            height: 80,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: Color(0Xff0e47a1),
-                              borderRadius: BorderRadius.all(Radius.circular(9)),
+                          child: InkWell(
+                            child: Container(
+                              padding: EdgeInsets.only(top: 10,bottom: 10),
+                              height: 80,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: Color(0Xff0e47a1),
+                                borderRadius: BorderRadius.all(Radius.circular(9)),
 
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.white,
-                                          width: 4
-                                      ),
-                                      image: DecorationImage(
-                                        image: NetworkImage("https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/linkedin_circle-512.png"),
-                                      )
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            color: Colors.white,
+                                            width: 4
+                                        ),
+                                        image: DecorationImage(
+                                          image: NetworkImage("https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/linkedin_circle-512.png"),
+                                        )
+                                    ),
+                                    height: 35,
+                                    width: 35,
+
                                   ),
-                                  height: 35,
-                                  width: 35,
+                                  Text("LinkedIn",style: TextStyle(color: Colors.white,fontSize: 20),),
+                                  Text("connect",style: TextStyle(color: Colors.white,fontSize: 10),),
 
-                                ),
-                                Text("LinkedIn",style: TextStyle(color: Colors.white,fontSize: 20),),
-                                Text("connect",style: TextStyle(color: Colors.white,fontSize: 10),),
-
-                              ],
+                                ],
+                              ),
                             ),
+                            onTap: _launchLinkedinURL,
                           ),
                         ),
                         Padding(

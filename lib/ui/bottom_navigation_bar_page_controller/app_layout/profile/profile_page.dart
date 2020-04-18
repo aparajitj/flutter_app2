@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/main.dart';
-import 'package:flutterapp2/ui/app_layout/profile/edit_profile.dart';
-import 'package:flutterapp2/ui/app_layout/profile/profile_qr.dart';
+import 'edit_profile.dart';
+import 'profile_qr.dart';
+
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

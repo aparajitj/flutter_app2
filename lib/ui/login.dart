@@ -1,25 +1,18 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
-import 'package:flutterapp2/ui/MyApp.dart';
-import 'package:flutterapp2/ui/app_layout/page_controller.dart';
-import 'package:flutterapp2/ui/app_layout/homepage.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/page_controller.dart';
 import 'package:flutterapp2/ui/signup_page.dart';
-import 'Responsive_Screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'forgot_password.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:passwordfield/passwordfield.dart';
 
 bool _obscureText = false;
 bool login;
-Screen size;
 var _emailController= new TextEditingController();
 var _passwordController= new TextEditingController();
 bool loginstat;
@@ -64,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => MyAppa()),
+              builder: (context) => MyPageController()),
         );
       }else if(status == 404 || status == "404"){
         Fluttertoast.showToast(
@@ -105,7 +98,6 @@ passwordVisible=true;
       print('no luck');
     else
       print('luck');*/
-    size = Screen(MediaQuery.of(context).size);
 
 
     final bool _obscureText = true;

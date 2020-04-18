@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/constant/data.dart';
-import 'package:flutterapp2/ui/app_layout/page_controller.dart';
-import 'package:flutterapp2/ui/app_layout/homepage.dart';
+//import 'package:flutterapp2/ui/app_layout/bottom_navigation_bar_page_controller/page_controller.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/page_controller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
@@ -47,7 +48,7 @@ class _SignupPageState extends State<SignupPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => MyAppa()),
+              builder: (context) => MyPageController()),
         );
       }else if(status == 404 || status == "404"){
         Fluttertoast.showToast(

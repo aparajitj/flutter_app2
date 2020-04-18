@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp2/ui/app_layout/Events.dart';
-import 'package:flutterapp2/ui/app_layout/homepage.dart';
-import 'package:flutterapp2/ui/app_layout/job_updates.dart';
-import 'package:flutterapp2/ui/app_layout/profile/profile.dart';
+//import 'package:flutterapp2/ui/app_layout/events/Events.dart';
+//import 'package:flutterapp2/ui/app_layout/homepage/homepage.dart';
+//import 'package:flutterapp2/ui/updates/job_updates.dart';
+//import 'package:flutterapp2/ui/app_layout/profile/profile_page.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/profile/profile_page.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/updates/updates.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/updates/job_updates.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/events/Events.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
 
-import 'Updates.dart';
-class MyAppa extends StatefulWidget {
+
+
+
+class MyPageController extends StatefulWidget {
   @override
-  _MyAppaState createState() => _MyAppaState();
+  _MyPageControllerState createState() => _MyPageControllerState();
 }
 
-class _MyAppaState extends State<MyAppa> {
+class _MyPageControllerState extends State<MyPageController> {
   int currentPageIndex=0;
   PageController _pageController;
 
@@ -34,7 +41,7 @@ class _MyAppaState extends State<MyAppa> {
         children: <Widget>[
           Homepage(),
         Events(),
-          updates(),
+          Updates(),
           ProfilePage(),
         ],
 

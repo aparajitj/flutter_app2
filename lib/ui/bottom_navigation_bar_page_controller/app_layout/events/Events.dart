@@ -1,14 +1,12 @@
 //import 'dart:html';
 
 //import 'dart:html';
-import 'Responsive_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'eventDetails.dart';
-import 'homepage.dart';
+import '../homepage/homepage.dart';
 
-Screen size;
 
 
 
@@ -21,7 +19,6 @@ class Events extends StatefulWidget {
 class _EventsState extends State<Events> {
   @override
   Widget build(BuildContext context) {
-    size = Screen(MediaQuery.of(context).size);
 
     return Scaffold(
       backgroundColor: Colors.grey.shade200,

@@ -1,12 +1,51 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'edit_profile.dart';
 import 'profile_qr.dart';
+import 'package:url_launcher/url_launcher.dart';
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
 
-class ProfilePage extends StatelessWidget {
+class _ProfilePageState extends State<ProfilePage> {
+  void saveDetails() async{
+    SharedPreferences sp;
+    sp= await SharedPreferences.getInstance();
+    // login=sp.getBool('true')?? false;
+
+    sp.setString('College', editCollege.text);
+    sp.setString('Name', editName.text);
+    sp.setString('Mobile_no', editContactNumber.text);
+    sp.setString('Facebook', editFacebookLink.text);
+    sp.setString('Instagram', editInstagramLink.text);
+    sp.setString('LinkedIn', editLinkedLink.text);
+
+  }
+  takeDetails() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    editName.text = prefs.getString('Name');
+    editCollege.text = prefs.getString('College');
+    editContactNumber.text = prefs.getString('Mobile_no');
+    editFacebookLink.text = prefs.getString('Facebook');
+    editInstagramLink.text = prefs.getString('Instagram');
+    editLinkedLink.text = prefs.getString('LinkedIn');
+
+
+  }
+  @override
+  void initState() {
+
+    // TODO: implement initState
+    super.initState();
+    takeDetails();
+  }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -296,7 +335,13 @@ class ProfilePage extends StatelessWidget {
                         width: 40,
                         child: IconButton(icon:Icon(Icons.edit,color: Colors.black,size: 20),onPressed: (){
                           Navigator.push(
-                              context, MaterialPageRoute(builder: (context) => EditProfile()));
+                              context, MaterialPageRoute(builder: (context) => EditProfile(
+                            onSavePressed: (){
+                              setState(() {
+                                saveDetails();
+                              });
+                            },
+                          )));
 
 
                         },),

@@ -1,9 +1,60 @@
 //import 'dart:html';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-class Updates extends StatelessWidget {
+import 'package:flutterapp2/constant/globals.dart' as globals;
+import 'dart:convert';
+
+var notifyTitle;
+var notifyMsg;
+var notifyLink;
+
+class Updates extends StatefulWidget {
+  @override
+  _UpdatesState createState() => _UpdatesState();
+}
+
+class _UpdatesState extends State<Updates> {
+
+  Future<String> getNotification(context) async {
+
+    String url = globals.url + "getnotify";
+
+    http.post(url, body: {
+    }).then((http.Response response) async {
+      final int statusCode = response.statusCode;
+
+      if (statusCode < 200 || statusCode > 400 || json == null) {
+        throw new Exception("Error fetching data");
+      }
+      var responseArray = json.decode(response.body);
+      //print(responseArray);
+
+      var status = responseArray['status'];
+      if(status == 200 || status == "200"){
+        notifyTitle = List.generate(responseArray['data'].length, (i) =>responseArray['data'][i]['notifyTitle'].toString());
+        notifyLink = List.generate(responseArray['data'].length, (i)=>responseArray['data'][i]['notifyURL'].toString());
+      }else{
+
+      }
+
+      print(notifyTitle);
+      print(notifyLink);
+      //pr.show();
+
+
+    });
+
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getNotification(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: Colors.grey.shade200,

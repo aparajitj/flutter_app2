@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/profile/edit_profile.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/profile/profile_page.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/updates/updates.dart';
 
 
 
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: Homepage(),
+      home: Updates(),
     );
   }
 }

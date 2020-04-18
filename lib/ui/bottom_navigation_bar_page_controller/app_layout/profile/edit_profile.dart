@@ -1,28 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp2/constant/data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatelessWidget
+{final onSavePressed;
+  EditProfile( {
+    this.onSavePressed
+  } );
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
 
-    TextEditingController editName = new TextEditingController();
-    TextEditingController editContactNumber = new TextEditingController();
-    TextEditingController editCollege = new TextEditingController();
-    TextEditingController editFacebookLink= new TextEditingController();
-    TextEditingController editLinkedLink= new TextEditingController();
-    TextEditingController editInstagramLink= new TextEditingController();
 
-    editCollege.text = 'coep';
-    editName.text = 'Shreyas Hosmani';
-    editFacebookLink.text = 'https://www.facebook.com';
-    editLinkedLink.text = 'https://www.linkedin.com';
-    editInstagramLink.text = 'https://www.instagram.com';
-    editContactNumber.text = '7775049481';
+
 
 
 
 
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -144,6 +149,7 @@ class EditProfile extends StatelessWidget {
             Container(
               height: 40,
               child: RaisedButton(
+
                 color: Colors.amber.shade700,
                 elevation: 4,
 
@@ -151,9 +157,7 @@ class EditProfile extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
 
                 ),
-                onPressed: (){
-
-                },
+                onPressed: onSavePressed,
                 child: Text("SAVE",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
               ),
             )

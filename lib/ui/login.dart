@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
@@ -10,6 +12,7 @@ import 'forgot_password.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:passwordfield/passwordfield.dart';
 
 bool _obscureText = false;
 bool login;
@@ -98,6 +101,7 @@ passwordVisible=true;
       print('no luck');
     else
       print('luck');*/
+
 
 
     final bool _obscureText = true;

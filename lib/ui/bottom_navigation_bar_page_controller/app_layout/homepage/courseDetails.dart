@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 class courseDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,19 +20,22 @@ class courseDetails extends StatelessWidget {
     ),
       body: Column(
         children: <Widget>[
-          Image.asset(
-              'assets/images/course.png',
-              width: MediaQuery.of(context).size.height/4.5,
-              height: MediaQuery.of(context).size.height/4.5,
-            fit: BoxFit.fill,
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Image.asset(
+                'assets/images/course.png',
+                width: MediaQuery.of(context).size.height/4.75,
+                height: MediaQuery.of(context).size.height/4.75,
+              fit: BoxFit.fill,
 
 
 
+            ),
           ),
           Column(crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top:10.0,left: 15.0),
+                padding: const EdgeInsets.only(top:27.5,left: 15.0),
                 child: Text('Digital Marketing', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
               ),
             ],
@@ -92,6 +96,9 @@ class courseDetails extends StatelessWidget {
             child: Container(
               height: 50,
               child: RaisedButton(
+                  onPressed: () {
+                    launch('https://pages.razorpay.com/pl_EZ7RsAvJMBhrIY/view');
+                  },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5))
                 ),
@@ -104,7 +111,6 @@ class courseDetails extends StatelessWidget {
                     color: Colors.white,fontSize: 20,
                   )),
                 ),
-                onPressed: (){},
               ),
             ),
           )

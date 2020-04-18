@@ -34,6 +34,10 @@ RegExp emailid_exp = new RegExp(emailid_pattern);
 bool autoValidation = false;
 bool showSignupPassword = false;
 bool userLogedIn;
-
-
+TextEditingController editName = new TextEditingController(text: 'coep');
+TextEditingController editContactNumber = new TextEditingController(text:'Shreyas Hosmani');
+TextEditingController editCollege = new TextEditingController(text: 'https://www.facebook.com');
+TextEditingController editFacebookLink= new TextEditingController(text: 'https://www.linkedin.com');
+TextEditingController editLinkedLink= new TextEditingController(text: 'https://www.instagram.com');
+TextEditingController editInstagramLink= new TextEditingController(text: '7775049481');
 

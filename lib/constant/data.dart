@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 String name;
 String email_id;
@@ -34,10 +35,18 @@ RegExp emailid_exp = new RegExp(emailid_pattern);
 bool autoValidation = false;
 bool showSignupPassword = false;
 bool userLogedIn;
-TextEditingController editName = new TextEditingController(text: 'coep');
-TextEditingController editContactNumber = new TextEditingController(text:'Shreyas Hosmani');
-TextEditingController editCollege = new TextEditingController(text: 'https://www.facebook.com');
-TextEditingController editFacebookLink= new TextEditingController(text: 'https://www.linkedin.com');
-TextEditingController editLinkedLink= new TextEditingController(text: 'https://www.instagram.com');
-TextEditingController editInstagramLink= new TextEditingController(text: '7775049481');
+TextEditingController editName = new TextEditingController();
+TextEditingController editContactNumber = new TextEditingController();
+TextEditingController editEmailID = new TextEditingController();
+TextEditingController editCollege = new TextEditingController();
+TextEditingController editFacebookLink= new TextEditingController();
+TextEditingController editLinkedLink= new TextEditingController();
+TextEditingController editInstagramLink= new TextEditingController();
 
+TextEditingController forgetPasswordEmailController= new TextEditingController();
+
+String userID;
+
+String xyz;
+
+SharedPreferences sp;

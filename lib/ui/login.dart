@@ -26,16 +26,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var tempUserID;
   final _formKey = GlobalKey<FormState>();
   int _index=0;
   void login_var() async{
-    SharedPreferences sp;
+
     sp= await SharedPreferences.getInstance();
     // login=sp.getBool('true')?? false;
 
-    sp.setBool('true', login);
+    sp.setBool('userLogedIn', login);
+    sp.setString('userID', tempUserID);
 
   }
+
   Future<String> Login(context) async {
 
     String url ="https://test.gathrr.in/userapp/userlogin";
@@ -54,8 +57,16 @@ class _LoginPageState extends State<LoginPage> {
       }
       var responseArray = json.decode(response.body);
       print(responseArray);
+     /* var UserID = responseArray['data'] ['uID'];*/
+      tempUserID = responseArray['data'][0]['uID'].toString();
+      //List.generate(responseArray['data'].length, (i)=>responseArray['data'][i]['uID'].toString());
+      print(userID);
+
+
       var status = responseArray['status'];
+
       if(status == "200" || status == 200){
+        login_var();
         Fluttertoast.showToast(msg: "Logged in successfully!");
         Navigator.pushReplacement(
           context,
@@ -101,6 +112,7 @@ passwordVisible=true;
       print('no luck');
     else
       print('luck');*/
+
 
 
 
@@ -263,6 +275,7 @@ passwordVisible=true;
                       setState(() {
                         if(!_formKey.currentState.validate())
                         {
+
                           autoValidation = true;
 
                           return;

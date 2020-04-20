@@ -68,8 +68,8 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   void loginProcess() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('userLogedIn', true);
+    sp = await SharedPreferences.getInstance();
+    sp.setBool('userLogedIn', true);
 
   }
 

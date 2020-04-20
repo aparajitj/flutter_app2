@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp2/constant/data.dart';
 //import 'package:flutterapp2/ui/app_layout/events/Events.dart';
 //import 'package:flutterapp2/ui/app_layout/homepage/homepage.dart';
 //import 'package:flutterapp2/ui/updates/job_updates.dart';
@@ -8,6 +9,7 @@ import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/updates/job_updates.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/events/Events.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -20,11 +22,22 @@ class MyPageController extends StatefulWidget {
 class _MyPageControllerState extends State<MyPageController> {
   int currentPageIndex=0;
   PageController _pageController;
+  void getUserID() async{
+
+    sp= await SharedPreferences.getInstance();
+    // login=sp.getBool('true')?? false;
+    userID = sp.getString('userID');
+
+
+
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getUserID();
+
     _pageController=PageController();
   }
   @override

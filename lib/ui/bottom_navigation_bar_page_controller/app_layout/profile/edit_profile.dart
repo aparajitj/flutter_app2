@@ -1,13 +1,55 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/profile/profile_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutterapp2/constant/globals.dart' as globals;
+import 'package:http/http.dart' as http;
 
 class EditProfile extends StatelessWidget
-{final onSavePressed;
-  EditProfile( {
-    this.onSavePressed
-  } );
+{
+
+Future<String> edit_profile(context) async {
+  print(userID);
+  String url = globals.url + "edituserprofile";
+
+  http.post(url, body: {
+    "uID":userID,
+    "college": editCollege.text,
+    "fullname": editName.text,
+    "mobileno" : editContactNumber.text,
+    "linkedin": editLinkedLink.text,
+    "facebook": editFacebookLink.text,
+    "instagram": editInstagramLink.text,
+
+
+  }).then((http.Response response) async {
+    final int statusCode = response.statusCode;
+
+    if (statusCode < 200 || statusCode > 400 || json == null) {
+      throw new Exception("Error fetching data");
+    }
+    var responseArray = json.decode(response.body);
+    print(responseArray);
+
+    var status = responseArray['status'];
+    /* if(status == 200 || status == "200"){
+        notifyTitle = List.generate(responseArray['data'].length, (i) =>responseArray['data'][i]['notifyTitle'].toString());
+        notifyLink = List.generate(responseArray['data'].length, (i)=>responseArray['data'][i]['notifyURL'].toString());
+      }else{
+
+      }
+
+      print(notifyTitle);
+      print(notifyLink);*/
+    //pr.show();
+
+
+  });
+
+}
 
 
 
@@ -16,9 +58,8 @@ class EditProfile extends StatelessWidget
 
 
 
-  @override
+@override
   Widget build(BuildContext context) {
-
 
 
 
@@ -37,7 +78,8 @@ class EditProfile extends StatelessWidget
                   colors: [Color(0Xffff6d00), Colors.amber])),
         ),
         leading: IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,),onPressed: (){
-          Navigator.pop(context);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ProfilePage(        )));
         },),
         title: Text("Edit Profile"),
         centerTitle: true,
@@ -64,9 +106,9 @@ class EditProfile extends StatelessWidget
                       Text("Name:   ",style: TextStyle(color: Colors.black,fontSize: 17),),
 
                       Expanded(child: DrawEditTextField(keyboardType: TextInputType.text,textfieldController: editName,
-                        onChangedVaue: (value){
+                       /* onChangedVaue: (value){
                         editName = value;
-                      },)),
+                      },*/)),
                     ],
                   ),
                   Row(
@@ -74,9 +116,7 @@ class EditProfile extends StatelessWidget
                       Text("Contact no.:   ",style: TextStyle(color: Colors.black,fontSize: 17),),
 
                       Expanded(child: DrawEditTextField(keyboardType: TextInputType.number,textfieldController: editContactNumber,
-                          onChangedVaue: (value){
-                            editContactNumber = value;
-                          })),
+                          )),
                     ],
                   ),
 
@@ -85,9 +125,7 @@ class EditProfile extends StatelessWidget
                       Text("College:   ",style: TextStyle(color: Colors.black,fontSize: 17),),
 
                       Expanded(child: DrawEditTextField(keyboardType: TextInputType.text,textfieldController: editCollege,
-                          onChangedVaue: (value){
-                            editCollege = value;
-                          })),
+                         )),
                     ],
                   ),
                   Column(
@@ -98,9 +136,7 @@ class EditProfile extends StatelessWidget
                           Text("Facebook:   ",style: TextStyle(color: Colors.black,fontSize: 17),),
 
                           Expanded(child: DrawEditTextField(keyboardType: TextInputType.text,textfieldController: editFacebookLink,
-                              onChangedVaue: (value){
-                          editFacebookLink = value;
-                          },)),
+                              )),
                         ],
                       ),
                       SizedBox(height: 3,),
@@ -115,9 +151,7 @@ class EditProfile extends StatelessWidget
                           Text("Linked In:   ",style: TextStyle(color: Colors.black,fontSize: 17),),
 
                           Expanded(child: DrawEditTextField(keyboardType: TextInputType.text,textfieldController: editLinkedLink,
-                            onChangedVaue: (value){
-                              editLinkedLink = value;
-                            },)),
+                            )),
                         ],
                       ),
                       SizedBox(height: 3,),
@@ -132,9 +166,7 @@ class EditProfile extends StatelessWidget
                           Text("Instagram:   ",style: TextStyle(color: Colors.black,fontSize: 17),),
 
                           Expanded(child: DrawEditTextField(keyboardType: TextInputType.text,textfieldController: editInstagramLink,
-                            onChangedVaue: (value){
-                              editInstagramLink = value;
-                            },)),
+                           )),
                         ],
                       ),
                       SizedBox(height: 3,),
@@ -157,8 +189,15 @@ class EditProfile extends StatelessWidget
                   borderRadius: BorderRadius.all(Radius.circular(10)),
 
                 ),
-                onPressed: onSavePressed,
-                child: Text("SAVE",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                onPressed:() {
+                          edit_profile(context);
+                                },
+                      child:
+                  Text("SAVE",style: TextStyle(color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),)
+
+
               ),
             )
           ],
@@ -171,8 +210,8 @@ class EditProfile extends StatelessWidget
 class DrawEditTextField extends StatelessWidget {
   final textfieldController;
   final keyboardType;
-  final onChangedVaue;
-  DrawEditTextField({this.textfieldController,this.keyboardType,this.onChangedVaue});
+
+  DrawEditTextField({this.textfieldController,this.keyboardType,});
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +219,7 @@ class DrawEditTextField extends StatelessWidget {
       controller: textfieldController,
       keyboardType: keyboardType,
         style: TextStyle(color: Colors.black,fontSize: 17),
-      onChanged: onChangedVaue,
+
       decoration: InputDecoration(
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.grey.shade700,width: 2),

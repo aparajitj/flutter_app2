@@ -1,9 +1,50 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/updates/updates.dart';
 import 'package:url_launcher/url_launcher.dart';
-class eventDetails extends StatelessWidget {
+import 'package:http/http.dart' as http;
+import 'package:flutterapp2/constant/globals.dart' as globals;
+class eventDetails extends StatefulWidget {
+  @override
+  _eventDetailsState createState() => _eventDetailsState();
+}
+
+class _eventDetailsState extends State<eventDetails> {
+  Future<String> event_det(context) async {
+
+    String url = globals.url + "getuserongoingevent";
+
+    http.post(url, body: {
+    }).then((http.Response response) async {
+      final int statusCode = response.statusCode;
+
+      if (statusCode < 200 || statusCode > 400 || json == null) {
+        throw new Exception("Error fetching data");
+      }
+      var responseArray = json.decode(response.body);
+      print(responseArray);
+
+      var status = responseArray['status'];
+     /* if(status == 200 || status == "200"){
+        notifyTitle = List.generate(responseArray['data'].length, (i) =>responseArray['data'][i]['notifyTitle'].toString());
+        notifyLink = List.generate(responseArray['data'].length, (i)=>responseArray['data'][i]['notifyURL'].toString());
+      }else{
+
+      }
+
+      print(notifyTitle);
+      print(notifyLink);*/
+      //pr.show();
+
+
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
+    event_det(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

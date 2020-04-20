@@ -1,47 +1,80 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/main.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'edit_profile.dart';
+import 'package:flutterapp2/constant/globals.dart' as globals;
+import 'package:http/http.dart' as http;
+
 import 'profile_qr.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  void saveDetails() async{
-    SharedPreferences sp;
-    sp= await SharedPreferences.getInstance();
-    // login=sp.getBool('true')?? false;
-
-    sp.setString('College', editCollege.text);
-    sp.setString('Name', editName.text);
-    sp.setString('Mobile_no', editContactNumber.text);
-    sp.setString('Facebook', editFacebookLink.text);
-    sp.setString('Instagram', editInstagramLink.text);
-    sp.setString('LinkedIn', editLinkedLink.text);
-
-  }
-  takeDetails() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    editName.text = prefs.getString('Name');
-    editCollege.text = prefs.getString('College');
-    editContactNumber.text = prefs.getString('Mobile_no');
-    editFacebookLink.text = prefs.getString('Facebook');
-    editInstagramLink.text = prefs.getString('Instagram');
-    editLinkedLink.text = prefs.getString('LinkedIn');
 
 
-  }
   @override
   void initState() {
 
     // TODO: implement initState
     super.initState();
-    takeDetails();
+    profile_info(context);
+
+  }
+  Future<String> profile_info(context) async {
+
+    String url = globals.url + "getuserprofile";
+
+    http.post(url, body: {
+      'userID':userID,
+
+
+    }).then((http.Response response) async {
+      final int statusCode = response.statusCode;
+
+      if (statusCode < 200 || statusCode > 400 || json == null) {
+        throw new Exception("Error fetching data");
+      }
+      var responseArray = json.decode(response.body);
+      setState(() {
+        editEmailID.text=responseArray['data']['uEmail'].toString();
+        editContactNumber.text=responseArray['data']['uMobile'].toString();
+        editCollege.text=responseArray['data']['uCollegeName'].toString();
+        editInstagramLink.text=responseArray['data']['uInstagram'].toString();
+        editFacebookLink.text=responseArray['data']['uFacebook'].toString();
+        editLinkedLink.text=responseArray['data']['uLinkedin'].toString();
+        editName.text=responseArray['data']['uName'].toString();
+
+      });
+
+     // customer_name_controller.text=responseArray['data']['uEmail'].toString();
+
+
+      print(responseArray);
+
+      var status = responseArray['status'];
+      /* if(status == 200 || status == "200"){
+        notifyTitle = List.generate(responseArray['data'].length, (i) =>responseArray['data'][i]['notifyTitle'].toString());
+        notifyLink = List.generate(responseArray['data'].length, (i)=>responseArray['data'][i]['notifyURL'].toString());
+      }else{
+
+      }
+
+      print(notifyTitle);
+      print(notifyLink);*/
+      //pr.show();
+
+
+    });
+
   }
   @override
   Widget build(BuildContext context) {
@@ -84,8 +117,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            Text("Shreyas Hosmani",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),
-                            Text("College: coep",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 12,color: Colors.black87),),
+                            Text(editName.text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),
+                            Text("College: "+editCollege.text == null ? "Add college name" :editCollege.text ,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 12,color: Colors.black87),),
 
                             /* Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -174,7 +207,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text("Email",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15,color: Colors.black)),
-                                            Text("coolshryas1996123@gmail.com",style: TextStyle(fontSize: 13,color: Colors.black87)),
+                                            Text(editEmailID.text,style: TextStyle(fontSize: 13,color: Colors.black87)),
                                           ],
                                         ),
                                       ],
@@ -193,7 +226,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                           children: <Widget>[
                                             Text("Phone",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15,color: Colors.black)),
-                                            Text("7775049481",style: TextStyle(fontSize: 13,color: Colors.black87)),
+                                            Text(editContactNumber.text,style: TextStyle(fontSize: 13,color: Colors.black87)),
                                           ],
                                         ),
                                       ],
@@ -227,7 +260,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                           children: <Widget>[
                                             Text("Facebbok",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15,color: Colors.black)),
-                                            Text("https://www.facebook.com",style: TextStyle(fontSize: 13,color: Colors.black87)),
+                                            Text(editFacebookLink.text,style: TextStyle(fontSize: 13,color: Colors.black87)),
                                           ],
                                         ),
                                       ],
@@ -259,7 +292,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                           children: <Widget>[
                                             Text("LinkedIn",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15,color: Colors.black)),
-                                            Text("hhtps://www.linkedin.com",style: TextStyle(fontSize: 13,color: Colors.black87)),
+                                            Text(editLinkedLink.text,style: TextStyle(fontSize: 13,color: Colors.black87)),
                                           ],
                                         ),
                                       ],
@@ -292,7 +325,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                           children: <Widget>[
                                             Text("Instagram",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15,color: Colors.black)),
-                                            Text("https://www.instagram.com",style: TextStyle(fontSize: 13,color: Colors.black87)),
+                                            Text(editInstagramLink.text,style: TextStyle(fontSize: 13,color: Colors.black87)),
                                           ],
                                         ),
                                       ],
@@ -336,11 +369,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: IconButton(icon:Icon(Icons.edit,color: Colors.black,size: 20),onPressed: (){
                           Navigator.push(
                               context, MaterialPageRoute(builder: (context) => EditProfile(
-                            onSavePressed: (){
-                              setState(() {
-                                saveDetails();
-                              });
-                            },
+
                           )));
 
 
@@ -461,7 +490,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     child: Container(
                                                       child: FlatButton(
 
-                                                        onPressed: () {},
+                                                        onPressed: ()async {
+                                                          sp=await SharedPreferences.getInstance();
+                                                          sp.clear();
+                                                          runApp(new MyApp());
+                                                          Fluttertoast.showToast(msg: "Logged out successfully!");
+                                                          Navigator.pop(context);
+
+                                                        },
                                                         shape: RoundedRectangleBorder(
                                                             borderRadius: BorderRadius.circular(20)
                                                         ),

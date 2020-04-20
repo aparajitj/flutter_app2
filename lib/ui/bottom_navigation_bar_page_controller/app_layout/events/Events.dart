@@ -2,9 +2,12 @@
 
 //import 'dart:html';
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:flutterapp2/constant/globals.dart' as globals;
+import 'package:http/http.dart' as http;
 import 'eventDetails.dart';
 import '../homepage/homepage.dart';
 
@@ -18,9 +21,72 @@ class Events extends StatefulWidget {
 }
 
 class _EventsState extends State<Events> {
+  Future<String> upcoming_event_det(context) async {
+
+    String url = globals.url + "getallupcomingevent";
+
+    http.post(url, body: {
+    }).then((http.Response response) async {
+      final int statusCode = response.statusCode;
+
+      if (statusCode < 200 || statusCode > 400 || json == null) {
+        throw new Exception("Error fetching data");
+      }
+      var responseArray = json.decode(response.body);
+      print(responseArray);
+
+      var status = responseArray['status'];
+      /* if(status == 200 || status == "200"){
+        notifyTitle = List.generate(responseArray['data'].length, (i) =>responseArray['data'][i]['notifyTitle'].toString());
+        notifyLink = List.generate(responseArray['data'].length, (i)=>responseArray['data'][i]['notifyURL'].toString());
+      }else{
+
+      }
+
+      print(notifyTitle);
+      print(notifyLink);*/
+      //pr.show();
+
+
+    });
+
+  }
+  Future<String> past_event_det(context) async {
+
+    String url = globals.url + "getallpastevent";
+
+    http.post(url, body: {
+
+    }).then((http.Response response) async {
+      final int statusCode = response.statusCode;
+
+      if (statusCode < 200 || statusCode > 400 || json == null) {
+        throw new Exception("Error fetching data");
+      }
+      var responseArray = json.decode(response.body);
+      print(responseArray);
+
+      var status = responseArray['status'];
+      /* if(status == 200 || status == "200"){
+        notifyTitle = List.generate(responseArray['data'].length, (i) =>responseArray['data'][i]['notifyTitle'].toString());
+        notifyLink = List.generate(responseArray['data'].length, (i)=>responseArray['data'][i]['notifyURL'].toString());
+      }else{
+
+      }
+
+      print(notifyTitle);
+      print(notifyLink);*/
+      //pr.show();
+
+
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
-
+    //past_event_det(context);
+    past_event_det(context);
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
 

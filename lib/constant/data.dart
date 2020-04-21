@@ -42,8 +42,12 @@ TextEditingController editCollege = new TextEditingController();
 TextEditingController editFacebookLink= new TextEditingController();
 TextEditingController editLinkedLink= new TextEditingController();
 TextEditingController editInstagramLink= new TextEditingController();
+TextEditingController editUserProfile= new TextEditingController();
+
 
 TextEditingController forgetPasswordEmailController= new TextEditingController();
+
+
 
 String userID;
 

@@ -1,4 +1,9 @@
 import 'dart:convert';
+import 'package:path/path.dart';
+import 'dart:io';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +12,7 @@ import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutterapp2/constant/globals.dart' as globals;
 import 'package:http/http.dart' as http;
-
+File _image;
 class EditProfile extends StatelessWidget
 {
 
@@ -23,6 +28,7 @@ Future<String> edit_profile(context) async {
     "linkedin": editLinkedLink.text,
     "facebook": editFacebookLink.text,
     "instagram": editInstagramLink.text,
+    "userprfpic":editUserProfile.text
 
 
   }).then((http.Response response) async {
@@ -55,7 +61,11 @@ Future<String> edit_profile(context) async {
 
 
 
+Future getImage() async {
+  var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
+  editUserProfile.text=image.path;
+}
 
 
 @override
@@ -95,10 +105,25 @@ Future<String> edit_profile(context) async {
             Flexible(
               child: Column(
                 children: <Widget>[
-                  CircleAvatar(
-                    radius: MediaQuery.of(context).size.width/7,
-                    backgroundColor: Colors.grey.shade300,
-                    child: Icon(Icons.person,color: Colors.grey,size: MediaQuery.of(context).size.width/5,),
+                  Stack(
+                    alignment:Alignment.bottomRight,
+                    children:<Widget>[
+
+                      CircleAvatar(
+                      radius: MediaQuery.of(context).size.width/7,
+                      backgroundColor: Colors.grey.shade300,
+                      child: Icon(Icons.person,color: Colors.grey,size: MediaQuery.of(context).size.width/5,),
+                    ),
+                      Container(
+                          height: 40,
+                          width: 40,
+                          decoration:
+
+                          BoxDecoration(color:Colors.grey.shade200,
+                        shape: BoxShape.circle
+                      ),child: Center(child: IconButton(icon: Icon(Icons.camera_alt),iconSize: 25,color: Colors.grey.shade700, onPressed: getImage)))
+                    ],
+
                   ),
                   SizedBox(height: 10,),
                   Row(
@@ -178,6 +203,7 @@ Future<String> edit_profile(context) async {
                 ],
               ),
             ),
+
             Container(
               height: 40,
               child: RaisedButton(

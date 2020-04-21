@@ -40,8 +40,14 @@ class _MyPageControllerState extends State<MyPageController> {
 
     _pageController=PageController();
   }
+  void temp()async{
+    sp= await SharedPreferences.getInstance();
+
+
+  }
   @override
   Widget build(BuildContext context) {
+    temp();
     return Scaffold(
       body:PageView(
         controller: _pageController,

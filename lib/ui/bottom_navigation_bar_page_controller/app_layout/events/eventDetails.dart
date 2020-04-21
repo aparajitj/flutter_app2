@@ -6,12 +6,12 @@ import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutterapp2/constant/globals.dart' as globals;
-class eventDetails extends StatefulWidget {
+class EventDetails extends StatefulWidget {
   @override
-  _eventDetailsState createState() => _eventDetailsState();
+  _EventDetailsState createState() => _EventDetailsState();
 }
 
-class _eventDetailsState extends State<eventDetails> {
+class _EventDetailsState extends State<EventDetails> {
   Future<String> event_det(context) async {
 
     String url = globals.url + "getuserongoingevent";
@@ -64,7 +64,7 @@ class _eventDetailsState extends State<eventDetails> {
           Column(crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Image.asset(
-                  'asset/images/download.jpg',
+                  'assets/images/download.jpg',
                   width: MediaQuery.of(context).size.height/2.25,
                   height: MediaQuery.of(context).size.height/3.5,
                   fit:BoxFit.fill

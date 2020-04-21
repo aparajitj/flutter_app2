@@ -86,7 +86,7 @@ class _EventsState extends State<Events> {
   @override
   Widget build(BuildContext context) {
     //past_event_det(context);
-    past_event_det(context);
+    upcoming_event_det(context);
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
 
@@ -124,7 +124,7 @@ class _EventsState extends State<Events> {
                         onTap: () {Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => eventDetails()),
+                              builder: (context) => EventDetails()),
                         );},
                         child: Center(
                           child: ClipRRect(
@@ -133,7 +133,7 @@ class _EventsState extends State<Events> {
 
                             ),
                             child: Image.asset(
-                                'asset/images/download.jpg',
+                                'assets/images/download.jpg',
                                 width: MediaQuery.of(context).size.height/2.125,
                                 height: MediaQuery.of(context).size.height/4,
                                 fit:BoxFit.fill
@@ -178,7 +178,7 @@ class _EventsState extends State<Events> {
                       Padding(
                         padding: const EdgeInsets.only(left:10.0,top:10,bottom:10,right:10),
                         child: Image(
-                          image: AssetImage('asset/images/fuel_logo1.png'),
+                          image: AssetImage('assets/images/fuel_logo1.png'),
                           height: MediaQuery.of(context).size.width-300,
                           width: MediaQuery.of(context).size.width-300,
 

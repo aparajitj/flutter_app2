@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:email_validator/email_validator.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/constant/globals.dart'as globals;
@@ -111,7 +111,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         ),
 
                       ),
-
+                        validator: (values) {
+                          return values.isEmpty ?
+                          'Email is required' :
+                          !emailid_exp.hasMatch(values)
+                              ? 'Please enter valid Email'
+                              : null;
+                          /* validator: (val) => !EmailValidator.validate(val, true)
+                            ? 'Not a valid email.'
+                            : null,*/
+                        }
                       /* validator: (val) => !EmailValidator.validate(val, true)
                           ? 'Not a valid email.'
                           : null,*/

@@ -9,6 +9,7 @@ import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/page_contro
 import 'package:flutterapp2/ui/forgot_password.dart';
 import 'package:flutterapp2/ui/login.dart';
 import 'package:flutterapp2/ui/splash_screen.dart';
+import 'package:flutterapp2/ui/temp.dart';
 
 
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:SplashScreen(),
+      home:EventDetails(),
     );
   }
 }

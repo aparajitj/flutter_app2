@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/page_controller.dart';
 import 'package:flutterapp2/ui/signup_page.dart';
-import 'package:email_validator/email_validator.dart';
+
 import 'forgot_password.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -66,7 +66,10 @@ class _LoginPageState extends State<LoginPage> {
       var status = responseArray['status'];
 
       if(status == "200" || status == 200){
+        login=true;
         login_var();
+        _emailController.clear();
+        _passwordController.clear();
         Fluttertoast.showToast(msg: "Logged in successfully!");
         Navigator.pushReplacement(
           context,
@@ -170,10 +173,16 @@ passwordVisible=true;
                             borderSide: BorderSide(color: Colors.amber),
                           ),
                         ),
-                        validator: (val) => !EmailValidator.validate(val, true)
+                       validator: (values) {
+                         return values.isEmpty ?
+                         'Email is required' :
+                         !emailid_exp.hasMatch(values)
+                             ? 'Please enter valid Email'
+                             : null;
+                         /* validator: (val) => !EmailValidator.validate(val, true)
                             ? 'Not a valid email.'
-                            : null,
-                      ),
+                            : null,*/
+                       }),
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0),
                         child: Stack(

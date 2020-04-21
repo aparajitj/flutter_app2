@@ -4,11 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/main.dart';
+import 'package:flutterapp2/ui/splash_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'edit_profile.dart';
 import 'package:flutterapp2/constant/globals.dart' as globals;
 import 'package:http/http.dart' as http;
+
 
 import 'profile_qr.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,7 +22,13 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
 
-
+  Future<String>logout(context) async{
+    runApp(new MaterialApp(debugShowCheckedModeBanner: false,
+    home:SplashScreen()));
+    sp=await SharedPreferences.getInstance();
+    sp.clear();
+    Fluttertoast.showToast(msg: "Logged out successfully!");
+  }
   @override
   void initState() {
 
@@ -52,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
         editFacebookLink.text=responseArray['data']['uFacebook'].toString();
         editLinkedLink.text=responseArray['data']['uLinkedin'].toString();
         editName.text=responseArray['data']['uName'].toString();
-
+        editUserProfile.text=responseArray['data']['userprfpic'].toString();
       });
 
      // customer_name_controller.text=responseArray['data']['uEmail'].toString();
@@ -351,7 +359,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     CircleAvatar(
                       radius: 45,
                       backgroundColor: Colors.grey.shade300,
-                      child: Icon(Icons.person,color: Colors.grey,size: 50,),
+                      backgroundImage: NetworkImage(globals.url + editUserProfile.text),
                     ),
                     Row(children: <Widget>[
                       Container(
@@ -490,11 +498,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     child: Container(
                                                       child: FlatButton(
 
-                                                        onPressed: ()async {
-                                                          sp=await SharedPreferences.getInstance();
-                                                          sp.clear();
-                                                          runApp(new MyApp());
-                                                          Fluttertoast.showToast(msg: "Logged out successfully!");
+                                                        onPressed: () {
+
+                                                          logout(context);
+
                                                           Navigator.pop(context);
 
                                                         },

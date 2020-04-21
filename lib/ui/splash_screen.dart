@@ -53,12 +53,12 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Image(
-            image: AssetImage('asset/images/fuel_logo1.png'),
+            image: AssetImage('assets/images/fuel_logo1.png'),
             height: MediaQuery.of(context).size.width - 150,
             width: MediaQuery.of(context).size.width - 150,
           ),
           Image(
-            image: AssetImage('asset/images/fuel_logo2.png'),
+            image: AssetImage('assets/images/fuel_logo2.png'),
             height: MediaQuery.of(context).size.width / 2,
             width: MediaQuery.of(context).size.width / 2,
           ),

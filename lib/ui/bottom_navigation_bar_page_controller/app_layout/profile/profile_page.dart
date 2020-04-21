@@ -60,6 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
         editFacebookLink.text=responseArray['data']['uFacebook'].toString();
         editLinkedLink.text=responseArray['data']['uLinkedin'].toString();
         editName.text=responseArray['data']['uName'].toString();
+
         editUserProfile.text=responseArray['data']['userprfpic'].toString();
       });
 
@@ -478,7 +479,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                                       child: FlatButton(
 
-                                                        onPressed: () {},
+                                                        onPressed: () {Navigator.pop(context);},
                                                         shape: RoundedRectangleBorder(
                                                             borderRadius: BorderRadius.circular(20)
                                                         ),
@@ -502,7 +503,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                                           logout(context);
 
-                                                          Navigator.pop(context);
+
 
                                                         },
                                                         shape: RoundedRectangleBorder(

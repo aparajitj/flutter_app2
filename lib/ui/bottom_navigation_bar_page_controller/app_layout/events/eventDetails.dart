@@ -64,7 +64,7 @@ class _EventDetailsState extends State<EventDetails> {
           Column(crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Image.asset(
-                  'assets/images/download.jpg',
+                  'assets/images/wisecrab.jpg',
                   width: MediaQuery.of(context).size.height/2.25,
                   height: MediaQuery.of(context).size.height/3.5,
                   fit:BoxFit.fill

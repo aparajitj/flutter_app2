@@ -133,7 +133,7 @@ class _EventsState extends State<Events> {
 
                             ),
                             child: Image.asset(
-                                'assets/images/download.jpg',
+                                'assets/images/wisecrab.jpg',
                                 width: MediaQuery.of(context).size.height/2.125,
                                 height: MediaQuery.of(context).size.height/4,
                                 fit:BoxFit.fill

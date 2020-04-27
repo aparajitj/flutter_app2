@@ -12,6 +12,11 @@ import 'package:flutterapp2/ui/login.dart';
 import 'package:flutterapp2/ui/splash_screen.dart';
 import 'package:flutterapp2/ui/temp.dart';
 
+import 'package:flutter/material.dart';
+
+
+
+
 
 
 void main() => runApp(new MyApp());
@@ -27,7 +32,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:share(),
+      home:ShareCertificate(),
     );
   }
 }

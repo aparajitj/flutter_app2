@@ -22,6 +22,12 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  wc_flutter_share: ^0.2.0
+  flutter_share_me: ^0.9.1
+  share:
+    git:
+      url: https://github.com/d-silveira/flutter-share.git
+  social_share_plugin: ^0.3.1+1
   cupertino_icons: ^0.1.2
   http: ^0.12.0+4
   shared_preferences: ^0.5.6+3
@@ -29,8 +35,17 @@ dependencies:
   url_launcher: ^5.4.2
   passwordfield: ^0.0.5
   image_picker: ^0.6.5+1
+  agora_rtc_engine: 1.0.5
+  permission_handler: ^3.0.0
+  dash_chat: ^1.1.2
+  file_picker: ^1.4.0+1
+<<<<<<< HEAD
 
+=======
+>>>>>>> d0fc6baffb1fa07c1852c455228e5f7de6baefc5
 dev_dependencies:
+  flutter_driver:
+    sdk: flutter
   flutter_test:
     sdk: flutter
 
@@ -41,11 +56,8 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - assets/images/fuel_logo1.png
-    - assets/images/fuel_logo2.png
-    - assets/images/download.jpg
-    - assets/images/insta.png
-    - assets/images/course.png
+    - assets/images/
+
 
 
   # The following line ensures that the Material Icons font is

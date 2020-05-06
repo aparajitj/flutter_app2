@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:path/path.dart';
+import 'dart:convert';
+
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'dart:io' as Io;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
@@ -12,11 +14,12 @@ import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutterapp2/constant/globals.dart' as globals;
 import 'package:http/http.dart' as http;
-File _image;
+String base64img;
 class EditProfile extends StatelessWidget
 {
+  File _image;
 
-Future<String> edit_profile(context) async {
+Future<String> editProfile(context) async {
   print(userID);
   String url = globals.url + "edituserprofile";
 
@@ -28,7 +31,46 @@ Future<String> edit_profile(context) async {
     "linkedin": editLinkedLink.text,
     "facebook": editFacebookLink.text,
     "instagram": editInstagramLink.text,
-    "userprfpic":editUserProfile.text
+
+
+
+  }).then((http.Response response) async {
+    final int statusCode = response.statusCode;
+
+    if (statusCode < 200 || statusCode > 400 || json == null) {
+      throw new Exception("Error fetching data");
+    }
+    var responseArray = json.decode(response.body);
+    print(responseArray);
+
+    var status = responseArray['status'];
+    /* if(status == 200 || status == "200"){
+        notifyTitle = List.generate(responseArray['data'].length, (i) =>responseArray['data'][i]['notifyTitle'].toString());
+        notifyLink = List.generate(responseArray['data'].length, (i)=>responseArray['data'][i]['notifyURL'].toString());
+      }else{
+
+      }
+
+      print(notifyTitle);
+      print(notifyLink);*/
+    //pr.show();
+
+
+  });
+
+}
+
+Future<String> editProfilePic(context) async {
+  print(userID);
+  String url = globals.url + "editprofilepic";
+
+  base64img=base64Encode(_image.readAsBytesSync());
+  String fileName=_image.path.split("/").last;
+    print('file'+fileName);
+  http.post(url, body: {
+    "userID":userID,
+    "name":fileName,
+    "image": base64img,
 
 
   }).then((http.Response response) async {
@@ -59,12 +101,11 @@ Future<String> edit_profile(context) async {
 
 
 
-
-
 Future getImage() async {
   var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+_image=image;
+ // editUserProfile.text=image.path;
 
-  editUserProfile.text=image.path;
 }
 
 
@@ -216,7 +257,8 @@ Future getImage() async {
 
                 ),
                 onPressed:() {
-                          edit_profile(context);
+                          editProfile(context);
+                          editProfilePic(context);
                                 },
                       child:
                   Text("SAVE",style: TextStyle(color: Colors.white,

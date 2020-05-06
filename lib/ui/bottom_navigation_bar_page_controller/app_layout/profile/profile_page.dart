@@ -61,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
         editLinkedLink.text=responseArray['data']['uLinkedin'].toString();
         editName.text=responseArray['data']['uName'].toString();
 
-        editUserProfile.text=responseArray['data']['userprfpic'].toString();
+        editUserProfile.text=responseArray['userprfpic'].toString();
       });
 
      // customer_name_controller.text=responseArray['data']['uEmail'].toString();

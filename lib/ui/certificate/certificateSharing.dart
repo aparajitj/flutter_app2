@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'dart:async';
-import 'dart:io';
+import 'dart:io' as io;
+import 'package:permission_handler/permission_handler.dart';
 
 import 'dart:ui' as ui;
 
@@ -27,6 +28,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import '../bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
+
+
+
+
 
 class ShareCertificate extends StatefulWidget {
   @override
@@ -64,33 +69,38 @@ class _ShareCertificateState extends State<ShareCertificate> {
 //
 //}
 
+
+
   Future<String> get _localPath async {
-    final directory = await getTemporaryDirectory();
-    print("directory path: ${directory.path}");
-
-    return directory.path;
+  //final directory = await getApplicationDocumentsDirectory();
+//  final directory = await getExternalStorageDirectory();
+//    print("directory path: ${directory.path}");
+//
+//    //return directory.path;
+    return "/storage/emulated/0/";
   }
-  Future<File> get _localFile async {
-    final path = await _localPath;
 
-    bool isDirExist = await Directory(path).exists();
-    if (!isDirExist)
-      Directory(path).create();
-
-    File file = File('$path/counter.png');
-    return file;
-  }
   Future<void> _downloadImage() async {
-    final file = await _localFile;
+    try{
+    final path = await _localPath;
+    var knockDir = await Directory("$path/Fuel").create(recursive: true);
+    String imagePath = knockDir.path + "/counter.png";
 
     RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
-    ui.Image imageUI = await boundary.toImage();
+    ui.Image imageUI = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio*2);
     ByteData byteData = await imageUI.toByteData(format: ui.ImageByteFormat.png);
     Uint8List uint8List = byteData.buffer.asUint8List();
 
 
-    try{
-      file.writeAsBytes(uint8List);
+
+      //file.writeAsBytes(uint8List);
+
+
+//      bool isDirExist = await Directory(path).exists();
+//      if (!isDirExist)
+
+     File(imagePath).writeAsBytes(uint8List);
+
       print("hello");
 
 
@@ -100,10 +110,11 @@ class _ShareCertificateState extends State<ShareCertificate> {
     }
   }
 
+
   void _shareImage() async {
     try {
       RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
-      ui.Image imageUI = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
+      ui.Image imageUI = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio*2);
       final ByteData bytes = await imageUI.toByteData(format: ui.ImageByteFormat.png,);
 
       await WcFlutterShare.share(
@@ -180,7 +191,26 @@ class _ShareCertificateState extends State<ShareCertificate> {
                           side: BorderSide(color: Colors.amber.shade900)
                       ),
                       color: Colors.amber.shade900,
-                      onPressed:_downloadImage,
+                      onPressed:()async{
+
+                          // request runtime permission
+                          final permissionHandler = PermissionHandler();
+                          final status = await permissionHandler
+                              .checkPermissionStatus(PermissionGroup.storage);
+                          if (status != PermissionStatus.granted) {
+                            final requestRes = await permissionHandler
+                                .requestPermissions([PermissionGroup.storage]);
+                            if (requestRes[PermissionGroup.storage] != PermissionStatus.granted) {
+//                              _showSnackBar('Permission denined. Go to setting to granted!');
+//                              return _done();
+                            }
+                          }
+                          else{
+                            _downloadImage();
+
+                          }
+
+                      },
                       child: Row(mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text('Download',style: TextStyle(color: Colors.white,fontSize: 15),),

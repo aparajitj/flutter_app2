@@ -40,6 +40,10 @@ dependencies:
   dash_chat: ^1.1.2
   file_picker: ^1.4.0+1
   path_provider: ^1.6.7
+  pdf: ^1.7.1
+  syncfusion_flutter_pdf: ^18.1.48-beta
+
+
 
 dev_dependencies:
   flutter_driver:
@@ -78,17 +82,6 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-
-    - family: certificate
-      fonts:
-        - asset: fonts/PlayfairDisplay-VariableFont_wght.ttf
-
-    - family: Name
-      fonts:
-
-
-        - asset: fonts/Parisienne-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

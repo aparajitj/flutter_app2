@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'dart:async';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:io' as io;
+import 'dart:math';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'dart:ui' as ui;
@@ -42,32 +44,7 @@ class _ShareCertificateState extends State<ShareCertificate> {
   GlobalKey globalKey = GlobalKey();
 
 
-//  Future<void> _capturePng() async {
-//
-//    String imageName = '/screen_shot_scraw.png';
-//    Directory tempDir = await getApplicationDocumentsDirectory();
-//    String tempPath = '${tempDir.path}$imageName';
-//
-//    RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
-//    ui.Image imageUI = await boundary.toImage();
-//    ByteData byteData = await imageUI.toByteData(format: ui.ImageByteFormat.png);
-//    Uint8List uint8List = byteData.buffer.asUint8List();
-//
-//
-//
-//    bool isDirExist = await Directory(tempDir.path).exists();
-//    if (!isDirExist)
-//      Directory(tempDir.path).create();
-//
-//    File image = File(tempPath);
-////
-////    bool isExist = await image.exists();
-////    if (isExist)
-////      await image.delete();
-//
-//    File(tempPath).writeAsBytes(uint8List);
-//
-//}
+
 
 
 
@@ -84,24 +61,27 @@ class _ShareCertificateState extends State<ShareCertificate> {
     try{
     final path = await _localPath;
     var knockDir = await Directory("$path/Fuel").create(recursive: true);
-    String imagePath = knockDir.path + "/counter.png";
+    DateTime ketF = new DateTime.now();
+    String imagePath = knockDir.path + "/certificate_$ketF.png";
+
 
     RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
     ui.Image imageUI = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio*2);
     ByteData byteData = await imageUI.toByteData(format: ui.ImageByteFormat.png);
     Uint8List uint8List = byteData.buffer.asUint8List();
 
-
-
-      //file.writeAsBytes(uint8List);
-
-
-//      bool isDirExist = await Directory(path).exists();
-//      if (!isDirExist)
-
      File(imagePath).writeAsBytes(uint8List);
 
       print("hello");
+    Fluttertoast.showToast(
+        msg: "Image has been downloaded",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
 
 
     }

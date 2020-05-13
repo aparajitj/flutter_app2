@@ -1,11 +1,56 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
+import 'package:flutterapp2/signup/linkedin_signup_page.dart';
 import 'package:flutterapp2/ui/login.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
+Future<String> signup(context,emailID,password,name,mobileNo,deviceID) async {
 
+  String url ="https://dashboard.fuelngoindia.com/userapp/userregister";
+
+  http.post(url, body: {
+
+    "email": emailID,
+    "password":password,
+    "name": name,
+    "mobileno" : mobileNo,
+
+    "device_id" : "",
+
+  }).then((http.Response response) async {
+    final int statusCode = response.statusCode;
+
+    if (statusCode < 200 || statusCode > 400 || json == null) {
+      throw new Exception("Error fetching data");
+    }
+    var responseArray = json.decode(response.body);
+    print(responseArray);
+    var status = responseArray['status'];
+    if(status == "200" || status == 200){
+      Fluttertoast.showToast(msg: "Sign up successfully!");
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => LoginPage()),
+      );
+    }else if(status == 404 || status == "404"){
+      Fluttertoast.showToast(
+          msg: "sign up not successful",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+//            timeInSecForIosWeb: 1,
+          textColor: Colors.black,
+          fontSize: 16.0
+      );
+
+    }
+    //pr.show();
+
+
+  });
+}
 
 class SignupPage extends StatefulWidget {
   @override
@@ -16,51 +61,7 @@ class _SignupPageState extends State<SignupPage> {
 
 
   final GlobalKey<FormState>  form_key = GlobalKey<FormState>();
-  Future<String> signup(context) async {
 
-    String url ="https://test.gathrr.in/userapp/userregister";
-
-    http.post(url, body: {
-
-      "email": customer_email_id_controller.text,
-      "password": customer_password_controller.text,
-      "name": customer_name_controller.text,
-      "mobileno" : customer_contact_number_controller.text,
-
-      "device_id" : "",
-
-    }).then((http.Response response) async {
-      final int statusCode = response.statusCode;
-
-      if (statusCode < 200 || statusCode > 400 || json == null) {
-        throw new Exception("Error fetching data");
-      }
-      var responseArray = json.decode(response.body);
-      print(responseArray);
-      var status = responseArray['status'];
-      if(status == "200" || status == 200){
-        Fluttertoast.showToast(msg: "Sign up successfully!");
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => LoginPage()),
-        );
-      }else if(status == 404 || status == "404"){
-        Fluttertoast.showToast(
-            msg: "sign up not successful",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-//            timeInSecForIosWeb: 1,
-            textColor: Colors.black,
-            fontSize: 16.0
-        );
-
-      }
-      //pr.show();
-
-
-    });
-  }
 
 
 
@@ -141,8 +142,9 @@ class _SignupPageState extends State<SignupPage> {
                 SizedBox(
                   height: 20,
                 ),
-                Text('Already a user? Login!',style: TextStyle(color: Colors.black54),)
+                Text('Already a user? Login!',style: TextStyle(color: Colors.black54),),
 
+               LinkedinButton()
 
 
               ],
@@ -174,7 +176,7 @@ class _SignupPageState extends State<SignupPage> {
                     }
 
                     else
-                    {                      signup(context);
+                    {                      signup(context,customer_email_id_controller.text,customer_password_controller.text,customer_name_controller.text,customer_contact_number_controller.text,"");
 
                     form_key.currentState.save();
                       customer_name_controller.clear();
@@ -189,6 +191,7 @@ class _SignupPageState extends State<SignupPage> {
                 },
               ),
             )
+
           ],
 
         ),

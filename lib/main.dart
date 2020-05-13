@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp2/signup/user_signup_page.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/events/Events.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/events/eventDetails.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:ShareCertificate(),
+      home:SignupPage(),
     );
   }
 }

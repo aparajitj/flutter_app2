@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/signup/linkedin_signup_page.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
 import 'package:flutterapp2/ui/login.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -30,12 +31,14 @@ Future<String> signup(context,emailID,password,name,mobileNo,deviceID) async {
     var status = responseArray['status'];
     if(status == "200" || status == 200){
       Fluttertoast.showToast(msg: "Sign up successfully!");
+      isLinkedinSignUpSuccessful=true;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => LoginPage()),
+            builder: (context) => Homepage()),
       );
     }else if(status == 404 || status == "404"){
+      isLinkedinSignUpSuccessful=false;
       Fluttertoast.showToast(
           msg: "sign up not successful",
           toastLength: Toast.LENGTH_SHORT,
@@ -44,6 +47,7 @@ Future<String> signup(context,emailID,password,name,mobileNo,deviceID) async {
           textColor: Colors.black,
           fontSize: 16.0
       );
+
 
     }
     //pr.show();

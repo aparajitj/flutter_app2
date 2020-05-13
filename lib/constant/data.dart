@@ -54,3 +54,5 @@ String xyz;
 SharedPreferences sp;
 
 String textToCopy = "This was a challenging and rewarding course, which sharpened my BA skills in business process analysis, use cases, wireframes, and data modeling. I enjoy the value that this experience has already brought to my work and projects.";
+
+bool isLinkedinSignUpSuccessful;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/page_controller.dart';
 import 'package:linkedin_login/linkedin_login.dart';
 import 'package:flutterapp2/signup/user_signup_page.dart';
 
@@ -86,6 +87,7 @@ class LinkedinButton extends StatelessWidget {
            ),
          ),
          onPressed: (){
+
            Navigator.push(
              context,
              MaterialPageRoute(
@@ -93,7 +95,7 @@ class LinkedinButton extends StatelessWidget {
                  appBar: AppBar(
                    title: Text('OAuth User'),
                  ),
-                 destroySession: userLogedIn,
+                 destroySession:userLogedIn,
                  redirectUrl: redirectUrl,
                  clientId: clientId,
                  clientSecret: clientSecret,
@@ -110,11 +112,14 @@ class LinkedinButton extends StatelessWidget {
                    );
 
                    signup(context,user.email,"123456",user.name,"9123456789","");
-                   Navigator.pushReplacement(
+                 if (isLinkedinSignUpSuccessful==true)
+                   {Navigator.pushReplacement(
                      context,
                      MaterialPageRoute(
-                         builder: (context) => Homepage()),
-                   );
+                         builder: (context) => MyPageController()),
+                   );}
+                 else
+                 {Navigator.pop(context);}
                  },
                  catchError: (LinkedInErrorObject error) {
                    print('Error description: ${error.description},'

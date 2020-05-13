@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/signup/linkedin_signup_page.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
+import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/page_controller.dart';
 import 'package:flutterapp2/ui/login.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -35,7 +36,7 @@ Future<String> signup(context,emailID,password,name,mobileNo,deviceID) async {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => Homepage()),
+            builder: (context) => MyPageController()),
       );
     }else if(status == 404 || status == "404"){
       isLinkedinSignUpSuccessful=false;

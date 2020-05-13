@@ -8,9 +8,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:io' as io;
 import 'dart:math';
 import 'package:permission_handler/permission_handler.dart';
-
+//import 'package:syncfusion_flutter_pdf/pdf.dart';
+//import 'package:printing/printing.dart';
 import 'dart:ui' as ui;
-
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:wc_flutter_share/wc_flutter_share.dart';
@@ -33,7 +35,7 @@ import '../bottom_navigation_bar_page_controller/app_layout/homepage/homepage.da
 
 
 
-
+String imagePath;
 
 class ShareCertificate extends StatefulWidget {
   @override
@@ -49,29 +51,25 @@ class _ShareCertificateState extends State<ShareCertificate> {
 
 
   Future<String> get _localPath async {
-  //final directory = await getApplicationDocumentsDirectory();
+    //final directory = await getApplicationDocumentsDirectory();
 //  final directory = await getExternalStorageDirectory();
 //    print("directory path: ${directory.path}");
 //
 //    //return directory.path;
-    return "/storage/emulated/0/";
+    return "/storage/emulated/0";
   }
 
-  Future<void> _downloadImage() async {
+  /*Future<void> _downloadImage() async {
     try{
     final path = await _localPath;
     var knockDir = await Directory("$path/Fuel").create(recursive: true);
     DateTime ketF = new DateTime.now();
-    String imagePath = knockDir.path + "/certificate_$ketF.png";
-
-
+    imagePath = knockDir.path + "/certificate_$ketF.png";
     RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
     ui.Image imageUI = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio*2);
     ByteData byteData = await imageUI.toByteData(format: ui.ImageByteFormat.png);
     Uint8List uint8List = byteData.buffer.asUint8List();
-
      File(imagePath).writeAsBytes(uint8List);
-
       print("hello");
     Fluttertoast.showToast(
         msg: "Image has been downloaded",
@@ -82,14 +80,59 @@ class _ShareCertificateState extends State<ShareCertificate> {
         textColor: Colors.white,
         fontSize: 16.0
     );
-
-
+   pdfdata();
     }
     catch(e){
       print("error: $e");
     }
-  }
+  }*/
+  Future<String> pdfdata()async{
+    final path = await _localPath;
+    var knockDir = await Directory("$path/Fuel").create(recursive: true);
+    DateTime ketF = new DateTime.now();
+    imagePath = knockDir.path;
 
+    RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
+    ui.Image imageUI = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio*2);
+    ByteData byteData = await imageUI.toByteData(format: ui.ImageByteFormat.rawRgba);
+    final pdf = PdfDocument(deflate: zlib.encode);
+    final page = PdfPage(pdf, pageFormat: PdfPageFormat.a4);
+    final g = page.getGraphics();
+    const margin = 10.0 * PdfPageFormat.mm;
+    final w = page.pageFormat.width - margin * 2.0;
+    final h = page.pageFormat.height - margin * 2.0;
+    double iw, ih;
+    if (imageUI.width.toDouble() / imageUI.height.toDouble() < 1.0) {
+      ih = h;
+      iw = imageUI.width.toDouble() * ih / imageUI.height.toDouble();
+    } else {
+      iw = w;
+      ih = imageUI.height.toDouble() * iw / imageUI.width.toDouble();
+    }
+    PdfImage image = PdfImage(
+        pdf,
+        image: byteData.buffer.asUint8List(),
+        width: imageUI.width,
+        height: imageUI.height
+    );
+    g.drawImage(image, margin + (w - iw) / 2.0,
+        page.pageFormat.height - margin - ih - (h - ih) / 2.0, iw, ih);
+
+    final file = File("$imagePath/example$ketF.pdf");
+    await file.writeAsBytes(pdf.save());
+    Fluttertoast.showToast(
+        msg: "PDF saved",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+/*
+    Uint8List uint8List = byteData.buffer.asUint8List();
+*/
+  }
 
   void _shareImage() async {
     try {
@@ -106,131 +149,150 @@ class _ShareCertificateState extends State<ShareCertificate> {
       print('error: $e');
     }
   }
+
+  /* void pdfGen()async{
+    //Create a new PDF document
+    PdfDocument document=PdfDocument();
+//Adds a page to the document
+    PdfPage page = document.pages.add();
+//Draw the image
+    page.graphics.drawImage(
+        PdfBitmap(File(imagePath).readAsBytesSync()),
+        Rect.fromLTWH(
+            0, 0, page.getClientSize().width, page.getClientSize().height));
+//Saves the document
+    File('Output.pdf').writeAsBytes(document.save());
+//Disposes the document
+    document.dispose();
+  }*/
+
+
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       body:Stack(
-        children: <Widget>[
-          CustomPaint(
-              painter: TitleDraw(),
-              child: Container(
-                  padding: EdgeInsets.only(left:MediaQuery.of(context).size.height/25,top:MediaQuery.of(context).size.height/25,right:20,bottom:20),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height/5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text('Certificate',style: TextStyle(fontWeight:FontWeight.bold,color:Colors.white,fontSize: MediaQuery.of(context).size.height/23))
-                    ],
-                  ))
-          ),
-          Padding(
-            padding: EdgeInsets.only(left:10.0,right:10,top:MediaQuery.of(context).size.height/4),
-            child: Column(
-            children: <Widget>[
-              RepaintBoundary(
-                key: globalKey,
-                child: CertificateUI(),
-              ),
-              SizedBox(
-                height: 20
-              ),
-              Container(
-                padding: EdgeInsets.only(left:10,right:10),
-                child: Builder(
-                  builder:(context)=> GestureDetector(
-                    child: new Text(textToCopy,style: TextStyle(fontSize: 15),textAlign: TextAlign.justify,),
-                    onTap: () {
-                      Clipboard.setData(new ClipboardData(text: textToCopy));
-
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text('Copied to clipboard'),
-
-                      )
-                      );
-
-                    },
-                  ),
-                ),
-              ),
-              SizedBox(
-                  height: 20
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            CustomPaint(
+                painter: TitleDraw(),
+                child: Container(
+                    padding: EdgeInsets.only(left:MediaQuery.of(context).size.height/25,top:MediaQuery.of(context).size.height/25,right:20,bottom:20),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height/5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('Certificate',style: TextStyle(fontWeight:FontWeight.bold,color:Colors.white,fontSize: MediaQuery.of(context).size.height/23))
+                      ],
+                    ))
+            ),
+            Padding(
+              padding: EdgeInsets.only(left:10.0,right:10,top:MediaQuery.of(context).size.height/4),
+              child: Column(
                 children: <Widget>[
+                  RepaintBoundary(
+                    key: globalKey,
+                    child: CertificateUI(),
+                  ),
+                  SizedBox(
+                      height: 20
+                  ),
                   Container(
+                    padding: EdgeInsets.only(left:10,right:10),
+                    child: Builder(
+                      builder:(context)=> GestureDetector(
+                        child: new Text(textToCopy,style: TextStyle(fontSize: 15),textAlign: TextAlign.justify,),
+                        onTap: () {
+                          Clipboard.setData(new ClipboardData(text: textToCopy));
 
-                    height: 50,
-                    width: 130,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.amber.shade900)
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text('Copied to clipboard'),
+
+                          )
+                          );
+
+                        },
                       ),
-                      color: Colors.amber.shade900,
-                      onPressed:()async{
+                    ),
+                  ),
+                  SizedBox(
+                      height: 20
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Container(
 
-                          // request runtime permission
-                          final permissionHandler = PermissionHandler();
-                          final status = await permissionHandler
-                              .checkPermissionStatus(PermissionGroup.storage);
-                          if (status != PermissionStatus.granted) {
-                            final requestRes = await permissionHandler
-                                .requestPermissions([PermissionGroup.storage]);
-                            if (requestRes[PermissionGroup.storage] != PermissionStatus.granted) {
+                        height: 50,
+                        width: 130,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(18.0),
+                              side: BorderSide(color: Colors.amber.shade900)
+                          ),
+                          color: Colors.amber.shade900,
+                          onPressed:()async{
+
+                            // request runtime permission
+                            final permissionHandler = PermissionHandler();
+                            final status = await permissionHandler
+                                .checkPermissionStatus(PermissionGroup.storage);
+                            if (status != PermissionStatus.granted) {
+                              final requestRes = await permissionHandler
+                                  .requestPermissions([PermissionGroup.storage]);
+                              if (requestRes[PermissionGroup.storage] != PermissionStatus.granted) {
 //                              _showSnackBar('Permission denined. Go to setting to granted!');
 //                              return _done();
+                              }
                             }
-                          }
-                          else{
-                            _downloadImage();
+                            else{
+                              pdfdata();
 
-                          }
 
-                      },
-                      child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text('Download',style: TextStyle(color: Colors.white,fontSize: 15),),
-                          Padding(
-                            padding: const EdgeInsets.only(left:7.0),
-                            child: Icon(Icons.arrow_downward,color: Colors.white,),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
+                            }
 
-                    height: 50,
-                    width: 125,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.amber.shade900)
+                          },
+                          child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text('Download',style: TextStyle(color: Colors.white,fontSize: 15),),
+                              Padding(
+                                padding: const EdgeInsets.only(left:1.0),
+                                child: Icon(Icons.arrow_downward,color: Colors.white,),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                      color: Colors.amber.shade900,
-                      onPressed: _shareImage,
-                      child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text('Share',style: TextStyle(color: Colors.white,fontSize: 15),),
-                          Padding(
-                            padding: const EdgeInsets.only(left:7.0),
-                            child: Icon(Icons.share,color: Colors.white,),
-                          )
-                        ],
+                      Container(
+
+                        height: 50,
+                        width: 125,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(18.0),
+                              side: BorderSide(color: Colors.amber.shade900)
+                          ),
+                          color: Colors.amber.shade900,
+                          onPressed: _shareImage,
+                          child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text('Share',style: TextStyle(color: Colors.white,fontSize: 15),),
+                              Padding(
+                                padding: const EdgeInsets.only(left:7.0),
+                                child: Icon(Icons.share,color: Colors.white,),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                    ],
+                  )
+
+
                 ],
-              )
-
-
-            ],
-        ),
-          ),]
+              ),
+            ),]
       ),
 
     );

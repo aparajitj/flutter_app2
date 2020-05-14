@@ -9,7 +9,7 @@ import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/page_controller.dart';
 import 'package:flutterapp2/ui/certificate/certificateSharing.dart';
 import 'package:flutterapp2/ui/forgot_password.dart';
-import 'package:flutterapp2/ui/login.dart';
+import 'package:flutterapp2/ui/login/login.dart';
 import 'package:flutterapp2/ui/splash_screen.dart';
 import 'package:flutterapp2/ui/temp.dart';
 
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:SignupPage(),
+      home:Apple_SignIn(),
     );
   }
 }

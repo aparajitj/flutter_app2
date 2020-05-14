@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
+import 'package:flutterapp2/signup/signup_functionality.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/page_controller.dart';
 import 'package:linkedin_login/linkedin_login.dart';
@@ -112,14 +113,7 @@ class LinkedinButton extends StatelessWidget {
                    );
 
                    signup(context,user.email,"123456",user.name,"9123456789","");
-                 if (isLinkedinSignUpSuccessful==true)
-                   {Navigator.pushReplacement(
-                     context,
-                     MaterialPageRoute(
-                         builder: (context) => MyPageController()),
-                   );}
-                 else
-                 {Navigator.pop(context);}
+
                  },
                  catchError: (LinkedInErrorObject error) {
                    print('Error description: ${error.description},'

@@ -43,8 +43,9 @@ dependencies:
   pdf: ^1.7.1
   syncfusion_flutter_pdf: ^18.1.48-beta
   linkedin_login: ^1.1.3
-
-
+  apple_sign_in: ^0.1.0
+  firebase_auth: ^0.15.3
+  device_info: ^0.4.1+4
 dev_dependencies:
   flutter_driver:
     sdk: flutter

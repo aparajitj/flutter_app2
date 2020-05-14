@@ -2,60 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/signup/linkedin_signup_page.dart';
+import 'package:flutterapp2/signup/signup_functionality.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/page_controller.dart';
-import 'package:flutterapp2/ui/login.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutterapp2/ui/login/login.dart';
 
-Future<String> signup(context,emailID,password,name,mobileNo,deviceID) async {
-
-  String url ="https://dashboard.fuelngoindia.com/userapp/userregister";
-
-  http.post(url, body: {
-
-    "email": emailID,
-    "password":password,
-    "name": name,
-    "mobileno" : mobileNo,
-
-    "device_id" : "",
-
-  }).then((http.Response response) async {
-    final int statusCode = response.statusCode;
-
-    if (statusCode < 200 || statusCode > 400 || json == null) {
-      throw new Exception("Error fetching data");
-    }
-    var responseArray = json.decode(response.body);
-    print(responseArray);
-    var status = responseArray['status'];
-    if(status == "200" || status == 200){
-      Fluttertoast.showToast(msg: "Sign up successfully!");
-      isLinkedinSignUpSuccessful=true;
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MyPageController()),
-      );
-    }else if(status == 404 || status == "404"){
-      isLinkedinSignUpSuccessful=false;
-      Fluttertoast.showToast(
-          msg: "sign up not successful",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-//            timeInSecForIosWeb: 1,
-          textColor: Colors.black,
-          fontSize: 16.0
-      );
-
-
-    }
-    //pr.show();
-
-
-  });
-}
 
 class SignupPage extends StatefulWidget {
   @override

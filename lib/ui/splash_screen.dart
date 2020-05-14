@@ -3,11 +3,11 @@ import 'package:flutterapp2/constant/data.dart';
 import 'package:flutterapp2/ui/bottom_navigation_bar_page_controller/app_layout/homepage/homepage.dart';
 
 import 'bottom_navigation_bar_page_controller/page_controller.dart';
-import 'login.dart';
+import 'login/login.dart';
 
 //import 'package:flutterapp2/ui/app_layout.dart';
 import 'dart:async';
-import 'package:flutterapp2/ui/signup_page.dart';
+import 'package:flutterapp2/signup/user_signup_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {

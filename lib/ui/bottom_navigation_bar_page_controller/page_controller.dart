@@ -25,7 +25,7 @@ class _MyPageControllerState extends State<MyPageController> {
   void getUserID() async{
 
     sp= await SharedPreferences.getInstance();
-    // login=sp.getBool('true')?? false;
+    // ui.login=sp.getBool('true')?? false;
     userID = sp.getString('userID');
 
 
